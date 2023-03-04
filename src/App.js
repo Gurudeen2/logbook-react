@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./components/Header/Header";
-import SignForm from "./components/Register/SignForm";
+import Index from "./components/Register/Index";
 import "./App.css";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <>
       <Header title="LogBook" />
       <main>
-        <SignForm />
+        <Index />
       </main>
     </>
   );
