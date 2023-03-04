@@ -5,40 +5,11 @@ import { useFormContext } from "react-hook-form";
 const SignForm = (props) => {
   const { register } = useFormContext();
 
-  const [name, setName] = useState("");
-  const [state, setState] = useState("");
-  const [mobileNo, setMobileNo] = useState("");
-  const [nextName, setNextName] = useState("");
-  const [nextNo, setNextNo] = useState("");
-  const [description, setDescription] = useState("");
-
-  const onChangeNameHandler = (e) => {
-    setName(e.target.current);
-  };
-
-  const onChangeMobileHandler = (e) => {
-    setMobileNo(e.target.current);
-  };
-
-  const onChangeStateHandler = (e) => {
-    setState(e.target.current);
-  };
-
-  const onChangeNextNameHandler = (e) => {
-    setNextName(e.target.current);
-  };
-  const onChangeNextNumberHandler = (e) => {
-    setNextName(e.target.current);
-  };
-  const onChangeDescriptionHandler = (e) => {
-    setDescription(e.target.current);
-  };
-
   return (
     <Container style={{ marginBottom: "5rem" }}>
       <h5>Sign In/Out</h5>
       <br />
-      {/* <Form> */}
+
       <Card>
         <Card.Header
           style={{
@@ -62,8 +33,7 @@ const SignForm = (props) => {
                     name="fullname"
                     style={{ height: "1.8rem" }}
                     required
-                    {...register("name")}
-                    onChange={onChangeNameHandler}
+                    {...register("fullname")}
                   />
                   <Form.Control.Feedback type="invalid">
                     Please enter Name!
@@ -72,16 +42,16 @@ const SignForm = (props) => {
               </Form.Group>
             </Col>
             <Col>
-              <Form.Group as={Row} controlId="TelNo">
+              <Form.Group as={Row} controlId="telNo">
                 <Form.Label column sm="6" className="text-left">
                   Mobile Number*
                 </Form.Label>
                 <Col sm="8">
                   <Form.Control
                     type="text"
-                    name="TelNo"
+                    name="telNo"
                     style={{ height: "1.8rem" }}
-                    // ref={register}
+                    {...register("telno")}
                     required
                   />
                   <Form.Control.Feedback type="invalid">
@@ -102,7 +72,7 @@ const SignForm = (props) => {
                   <Form.Control
                     type="text"
                     name="state"
-                    // ref={register}
+                    {...register("state")}
                     style={{ height: "1.8rem" }}
                     required
                   />
@@ -137,7 +107,7 @@ const SignForm = (props) => {
                 <Col sm="8">
                   <Form.Control
                     type="text"
-                    // ref={register}
+                    {...register("nextofkin")}
                     name="nextofkin"
                     style={{ height: "1.8rem" }}
                     required
@@ -157,7 +127,7 @@ const SignForm = (props) => {
                 <Col sm="8">
                   <Form.Control
                     type="text"
-                    // ref={register}
+                    {...register("nextofkinno")}
                     name="state"
                     style={{ height: "1.8rem" }}
                     required
@@ -193,7 +163,7 @@ const SignForm = (props) => {
                   <Form.Control
                     type="text"
                     name="signin"
-                    // ref={register}
+                    {...register("siginin")}
                     placeholder="Enter Sign in or Sign out"
                     style={{ height: "1.8rem" }}
                     required
@@ -214,7 +184,7 @@ const SignForm = (props) => {
                   <Form.Control
                     type="text"
                     name="signdate"
-                    // ref={register}
+                    {...register("signdate")}
                     style={{ height: "1.8rem" }}
                     readOnly
                     defaultValue="2023-03-03"
@@ -236,7 +206,6 @@ const SignForm = (props) => {
           </Button>
         </Col>
       </Row>
-      {/* </Form> */}
     </Container>
   );
 };
