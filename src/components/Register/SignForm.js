@@ -201,8 +201,8 @@ const SignForm = (props) => {
       <Row style={{ marginTop: "1rem" }}>
         <Col></Col>
         <Col style={{ textAlign: "right" }}>
-          <Button type="submit" variant="success" size="sm">
-            Submit
+          <Button type="submit" variant="success" size="md">
+            Save
           </Button>
         </Col>
       </Row>
