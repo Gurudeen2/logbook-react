@@ -13,11 +13,11 @@
   }
 }
 main {
-  margin-top: 7rem;
+  margin-top: 6rem;
 }
 
 .App-header {
-  background-color: #8a2b06d7;
+  background-color: #8a2e0ac4;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
