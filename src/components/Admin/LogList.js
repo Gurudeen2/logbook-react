@@ -100,7 +100,9 @@ const LogList = () => {
       order: "desc",
     },
   ];
-
+const emptyDataMessage = () => {
+  return "No Data Founded";
+};
   return (
     <Card>
       <h3>Log List</h3>
@@ -124,11 +126,9 @@ const LogList = () => {
           </Row>
         </Container>
       </Form>
-      {/* <Button type="submit" size="md" variant="success">
-          Search
-        </Button> */}
+
       <BootstrapTable
-        responsive
+        noDataIndication={emptyDataMessage}
         striped
         bootstrap4={true}
         keyField="id"
