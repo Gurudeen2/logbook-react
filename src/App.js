@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./components/Header/Header";
 import Index from "./components/Register/Index";
 import LogList from "./components/Admin/LogList";
-
+import Footer from "./components/Footer/Footer";
 import "./App.css";
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
       <main>
         {/* <Index /> */}
         <LogList />
+        <Footer />
       </main>
     </>
   );
