@@ -5,6 +5,8 @@ import Card from "../UI/Card";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.css";
 import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
+import { Col, Row, Form, Button, Container } from "react-bootstrap";
+import "./LogList.css";
 
 const LogList = () => {
   const dummy_data = [
@@ -102,9 +104,33 @@ const LogList = () => {
   return (
     <Card>
       <h3>Log List</h3>
+      <Form>
+        <Container fluid style={{ paddingBottom: "0.3rem" }}>
+          <Row style={{ textAlign: "right" }}>
+            <Col></Col>
+            <Col sm="3" style={{ justifyContent: "right", display: "flex" }}>
+              <Form.Control
+                type="text"
+                name="search"
+                style={{ height: "1.8rem" }}
+                required
+              />
+              <div style={{ paddingLeft: "0.4rem" }}>
+                <Button size="sm" variant="success">
+                  Search
+                </Button>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </Form>
+      {/* <Button type="submit" size="md" variant="success">
+          Search
+        </Button> */}
       <BootstrapTable
+        responsive
         striped
-        bootstrap4
+        bootstrap4={true}
         keyField="id"
         data={dummy_data}
         columns={columns}
@@ -114,6 +140,7 @@ const LogList = () => {
           sizePerPage: 5,
           sizePerPageList: [5, 10, 15],
         })}
+        wrapperClasses="table-responsive"
       />
     </Card>
   );
