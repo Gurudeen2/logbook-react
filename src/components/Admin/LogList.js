@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "../UI/Card";
@@ -6,9 +6,12 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.css";
 import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
+import { getDocs, collection } from "firebase/firestore";
+import { db } from "../firebaseConfig/config";
 import "./LogList.css";
 
 const LogList = () => {
+  const [logList, setLogList] = useState([]);
   const dummy_data = [
     {
       name: "Fatai AKeem",
@@ -100,9 +103,25 @@ const LogList = () => {
       order: "desc",
     },
   ];
-const emptyDataMessage = () => {
-  return "No Data Founded";
-};
+  const emptyDataMessage = () => {
+    return "No Data Founded";
+  };
+
+  const fetchPost = async () => {
+    await getDocs(collection(db, "logbook")).then((logdoc) => {
+      const newData = logdoc.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setLogList(newData);
+      console.log("todos", newData);
+    });
+  };
+
+  useEffect(() => {
+    fetchPost();
+  }, []);
+
   return (
     <Card>
       <h3>Log List</h3>
@@ -132,7 +151,7 @@ const emptyDataMessage = () => {
         striped
         bootstrap4={true}
         keyField="id"
-        data={dummy_data}
+        data={logList}
         columns={columns}
         defaultSorted={defaultSorted}
         pagination={paginationFactory({

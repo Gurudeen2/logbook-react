@@ -3,22 +3,20 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Form } from "react-bootstrap";
 import SignForm from "./SignForm";
 import { addDoc, collection } from "@firebase/firestore";
-import { firestore } from "../firebaseConfig/config";
+import { db } from "../firebaseConfig/config";
 
 const Index = () => {
   // https://mcandb-b70a4-default-rtdb.firebaseio.com/
   const methods = useForm();
-  const onSubmit = (data) => {
-    const ref = collection(firestore, "test_data"); // Firebase creates this automatically
-    let data2 = {
-      testData: data,
-    };
+  const onSubmit = async (data) => {
     try {
-      addDoc(ref, data2).then((res) => {
-        console.log("success", res.firestore);
+      const docRef = await addDoc(collection(db, "logbook"), {
+        logbook: data,
       });
-    } catch (err) {
-      console.log("line 18---register/index.js", err);
+
+      console.log("Document written with ID: ", docRef);
+    } catch (e) {
+      console.error("Error adding document: ", e);
     }
     console.log("Register/Index", data);
   };

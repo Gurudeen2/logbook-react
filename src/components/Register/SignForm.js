@@ -41,14 +41,14 @@ const SignForm = (props) => {
               </Form.Group>
             </Col>
             <Col>
-              <Form.Group as={Row} controlId="telNo">
+              <Form.Group as={Row} controlId="telno">
                 <Form.Label column sm="6" className="text-left">
                   Mobile Number*
                 </Form.Label>
                 <Col sm="8">
                   <Form.Control
                     type="text"
-                    name="telNo"
+                    name="telno"
                     style={{ height: "1.8rem" }}
                     {...register("telno")}
                     required
@@ -127,7 +127,7 @@ const SignForm = (props) => {
                   <Form.Control
                     type="text"
                     {...register("nextofkinno")}
-                    name="state"
+                    name="nextofkinno"
                     style={{ height: "1.8rem" }}
                     required
                   />
