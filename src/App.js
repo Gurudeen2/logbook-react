@@ -10,9 +10,9 @@ function App() {
     <>
       <Header title="LogBook" />
       <main>
-        {/* <Index /> */}
-        <LogList />
-        <Footer />
+        <Index />
+        {/* <LogList /> */}
+        {/* <Footer /> */}
       </main>
     </>
   );
