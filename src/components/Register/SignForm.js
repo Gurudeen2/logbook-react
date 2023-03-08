@@ -6,7 +6,9 @@ const SignForm = (props) => {
   const { register } = useFormContext();
 
   return (
-    <Container style={{ marginBottom: "5rem" }}>
+    <Container
+    style={{ marginBottom: "5rem" }}
+    >
       <h5>Sign In/Out</h5>
       <br />
 
@@ -82,7 +84,25 @@ const SignForm = (props) => {
                 </Col>
               </Form.Group>
             </Col>
-            <Col></Col>
+            <Col>
+              <Form.Group as={Row} controlId="gender">
+                <Form.Label column sm="6" className="text-left">
+                  Gender
+                </Form.Label>
+                <Col sm="8">
+                  <Form.Control
+                    type="text"
+                    name="gender"
+                    {...register("gender")}
+                    style={{ height: "1.8rem" }}
+                    required
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    Please Gender!
+                  </Form.Control.Feedback>
+                </Col>
+              </Form.Group>
+            </Col>
           </Row>
         </Card.Body>
       </Card>

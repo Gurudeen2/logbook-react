@@ -11,14 +11,14 @@ function App() {
     <>
       <Header title="LogBook" />
       <main>
-        {/* <Switch> */}
-          {/* <Route path="/addlog"> */}
+        <Switch>
+          <Route path="/addlog">
             <Index />
-          {/* </Route>
-          <Route path="/viewlogs"> */}
+          </Route>
+          <Route path="/viewlogs">
             <LogList />
-          {/* </Route>
-        </Switch> */}
+          </Route>
+        </Switch>
       </main>
       <Footer />
     </>
