@@ -1,4 +1,5 @@
 import React from "react";
+import { Route, Switch } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Index from "./components/Register/Index";
 import LogList from "./components/Admin/LogList";
@@ -10,10 +11,16 @@ function App() {
     <>
       <Header title="LogBook" />
       <main>
-        <Index />
-        {/* <LogList /> */}
-        {/* <Footer /> */}
+        {/* <Switch> */}
+          {/* <Route path="/addlog"> */}
+            <Index />
+          {/* </Route>
+          <Route path="/viewlogs"> */}
+            <LogList />
+          {/* </Route>
+        </Switch> */}
       </main>
+      <Footer />
     </>
   );
 }

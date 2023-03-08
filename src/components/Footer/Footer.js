@@ -1,4 +1,4 @@
-import Card from "../UI/Card";
+import React from "react";
 import classes from "./Footer.module.css";
 
 const Footer = (props) => {
