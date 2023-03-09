@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import Index from "./components/Register/Index";
 import LogList from "./components/Admin/LogList";
 import Footer from "./components/Footer/Footer";
+import PageNotFound from "./components/Pages/PageNotFound";
 import "./App.css";
 
 function App() {
@@ -17,6 +18,9 @@ function App() {
           </Route>
           <Route path="/viewlogs">
             <LogList />
+          </Route>
+          <Route path="*">
+            <PageNotFound />
           </Route>
         </Switch>
       </main>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "../UI/Card";
@@ -15,8 +15,17 @@ const LogList = () => {
 
   const columns = [
     {
-      dataField: "name",
+      dataField: "fullname",
       text: "Name",
+      sort: true,
+      headerStyle: {
+        background: "#8a2e0ac4",
+        color: "#fff",
+      },
+    },
+    {
+      dataField: "gender",
+      text: "Gender",
       sort: true,
       headerStyle: {
         background: "#8a2e0ac4",
@@ -32,6 +41,7 @@ const LogList = () => {
         color: "#fff",
       },
     },
+
     {
       dataField: "mobilenumber",
       text: "Mobile Number",
@@ -51,7 +61,7 @@ const LogList = () => {
       },
     },
     {
-      dataField: "nextnumber",
+      dataField: "nextofkinno",
       text: "Kin's Mobile Number",
       sort: true,
       headerStyle: {
@@ -60,8 +70,8 @@ const LogList = () => {
       },
     },
     {
-      dataField: "description",
-      text: "Description",
+      dataField: "status",
+      text: "Status",
       sort: true,
       headerStyle: {
         background: "#8a2e0ac4",
@@ -78,54 +88,102 @@ const LogList = () => {
       },
     },
   ];
+
   const defaultSorted = [
     {
       dataField: "name",
       order: "desc",
     },
   ];
+
   const emptyDataMessage = () => {
     return "No Data Founded";
   };
 
-  const fetchPost = async () => {
+  const fetchPost = useCallback(async () => {
     await getDocs(collection(db, "logbook")).then((logdoc) => {
       const newData = logdoc.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
-      setLogList(newData);
-      console.log("todos", newData);
+      let transData = [];
+      for (let key in newData) {
+        transData.push({
+          id: newData[key].id,
+          fullname: newData[key].logbook.fullname,
+          gender: newData[key].logbook.gender,
+          nextofkin: newData[key].logbook.nextofkin,
+          nextofkinno: newData[key].logbook.nextofkinno,
+          status: newData[key].logbook.status,
+          signdate: newData[key].logbook.signdate,
+          state: newData[key].logbook.state,
+          mobilenumber: newData[key].logbook.mobilenumber,
+        });
+      }
+      setLogList(transData);
     });
-  };
+  }, []);
 
   useEffect(() => {
     fetchPost();
-  }, []);
+  }, [fetchPost]);
+
+  // description: "signin";
+  // fullname: "Fatai Akeem";
+  // gender: "Male";
+  // id: "dBCRjVPCHAgrmjf7DPzF";
+  // mobilenumber: "08063641230";
+  // nextofkin: "Toyin";
+  // nextofkinno: "0806361234";
+  // signdate: "2023-03-03";
+  // state: "Ogun State";
+
+  const searchHandler = (e) => {
+    console.log("142", e.target.value.trim());
+    if (e.target.value.trim() !== "") {
+      const filteredData = logList.filter(
+        (list) =>
+          list.fullname === e.target.value.trim() ||
+          list.mobilenumber === e.target.value.trim()
+      );
+
+      setLogList(filteredData);
+    }
+  };
+ 
 
   return (
     <Card>
       <h3>Log List</h3>
-      <Form>
-        <Container fluid style={{ paddingBottom: "0.3rem" }}>
-          <Row style={{ textAlign: "right" }}>
-            <Col></Col>
-            <Col sm="3" style={{ justifyContent: "right", display: "flex" }}>
-              <Form.Control
-                type="text"
-                name="search"
-                style={{ height: "1.8rem" }}
-                required
-              />
-              <div style={{ paddingLeft: "0.4rem" }}>
-                <Button size="sm" variant="success">
-                  Search
-                </Button>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </Form>
+      <Container fluid style={{ paddingBottom: "0.3rem" }}>
+        <Row style={{ textAlign: "left" }}>
+          <Col sm="12" md="8" lg="9">
+            <Button size="sm" variant="danger">
+              Add User
+            </Button>
+          </Col>
+          <Col
+            sm="12"
+            md="4"
+            lg="3"
+            style={{ justifyContent: "right", display: "flex" }}
+          >
+            <Form.Control
+              type="text"
+              name="search"
+              onChange={searchHandler}
+              style={{ height: "1.8rem" }}
+              placeholder="Search By Name or Mobile Number"
+              // required
+            />
+            <div style={{ paddingLeft: "0.4rem" }}>
+              <Button size="sm" variant="success">
+                Search
+              </Button>
+            </div>
+          </Col>
+        </Row>
+      </Container>
 
       <BootstrapTable
         noDataIndication={emptyDataMessage}

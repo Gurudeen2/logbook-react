@@ -6,15 +6,15 @@ import { addDoc, collection } from "@firebase/firestore";
 import { db } from "../firebaseConfig/config";
 
 const Index = () => {
-  // https://mcandb-b70a4-default-rtdb.firebaseio.com/
   const methods = useForm();
   const onSubmit = async (data) => {
     try {
       const docRef = await addDoc(collection(db, "logbook"), {
         logbook: data,
       });
-
       console.log("Document written with ID: ", docRef);
+
+      // check network error
     } catch (e) {
       console.error("Error adding document: ", e);
     }

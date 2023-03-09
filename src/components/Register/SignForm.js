@@ -2,13 +2,11 @@ import React from "react";
 import { Form, Row, Col, Container, Card, Button } from "react-bootstrap";
 import { useFormContext } from "react-hook-form";
 
-const SignForm = (props) => {
+const SignForm = () => {
   const { register } = useFormContext();
-
+  let date = new Date();
   return (
-    <Container
-    style={{ marginBottom: "5rem" }}
-    >
+    <Container style={{ marginBottom: "5rem" }}>
       <h5>Sign In/Out</h5>
       <br />
 
@@ -44,16 +42,16 @@ const SignForm = (props) => {
               </Form.Group>
             </Col>
             <Col>
-              <Form.Group as={Row} controlId="telno">
+              <Form.Group as={Row} controlId="mobilenumber">
                 <Form.Label column sm="6" className="text-left">
                   Mobile Number*
                 </Form.Label>
                 <Col sm="8">
                   <Form.Control
                     type="text"
-                    name="telno"
+                    name="mobilenumber"
                     style={{ height: "1.8rem" }}
-                    {...register("telno")}
+                    {...register("mobilenumber")}
                     required
                   />
                   <Form.Control.Feedback type="invalid">
@@ -90,16 +88,16 @@ const SignForm = (props) => {
                   Gender
                 </Form.Label>
                 <Col sm="8">
-                  <Form.Control
-                    type="text"
+                  <Form.Select
+                    size="sm"
                     name="gender"
                     {...register("gender")}
-                    style={{ height: "1.8rem" }}
                     required
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Please Gender!
-                  </Form.Control.Feedback>
+                  >
+                    <option></option>
+                    <option>Female</option>
+                    <option>Male</option>
+                  </Form.Select>
                 </Col>
               </Form.Group>
             </Col>
@@ -175,19 +173,21 @@ const SignForm = (props) => {
         <Card.Body>
           <Row>
             <Col>
-              <Form.Group as={Row} controlId="signin">
+              <Form.Group as={Row} controlId="status">
                 <Form.Label column sm="6" className="text-left">
-                  Description*
+                  Status*
                 </Form.Label>
                 <Col sm="8">
-                  <Form.Control
-                    type="text"
-                    name="signin"
-                    {...register("siginin")}
-                    placeholder="Enter Sign in or Sign out"
-                    style={{ height: "1.8rem" }}
+                  <Form.Select
+                    size="sm"
+                    name="status"
+                    {...register("status")}
                     required
-                  />
+                  >
+                    <option></option>
+                    <option>Sign In</option>
+                    <option>Sign Out</option>
+                  </Form.Select>
                   <Form.Control.Feedback type="invalid">
                     Please enter Sign In/Out!
                   </Form.Control.Feedback>
@@ -207,7 +207,7 @@ const SignForm = (props) => {
                     {...register("signdate")}
                     style={{ height: "1.8rem" }}
                     readOnly
-                    defaultValue="2023-03-03"
+                    defaultValue={date.toLocaleString()}
                   />
                   <Form.Control.Feedback type="invalid">
                     Please Sign In/Out!
