@@ -2,13 +2,26 @@ import React, { useState } from "react";
 import { Button, Col, Container, Row, Form, InputGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { EyeSlashFill, EyeFill } from "react-bootstrap-icons";
-
+import { useFormContext } from "react-hook-form";
 import classes from "./LoginForm.module.css";
 
 const LoginForm = () => {
+  const { register } = useFormContext();
+
   const [showPass, setShowPas] = useState(false);
+  const [inputName, setInputName] = useState("password");
   const showPasswordHandler = () => {
-    setShowPas(true);
+    if (inputName === "password") {
+      setShowPas(true);
+      setInputName("text");
+    } else {
+      setInputName("password");
+      setShowPas(false);
+    }
+  };
+
+  const checkInputName = (e) => {
+    setInputName(e.target.type);
   };
 
   return (
@@ -17,15 +30,15 @@ const LoginForm = () => {
         <Col>
           <Form.Group as={Row} controlId="username">
             <Form.Label column sm="6" className="text-left">
-              Username*
+              Username
             </Form.Label>
-            <Col sm="8">
+            <Col sm="12">
               <Form.Control
                 type="text"
                 name="username"
                 style={{ height: "1.8rem" }}
                 required
-                // {...register("username")}
+                {...register("username")}
               />
               <Form.Control.Feedback type="invalid">
                 Please enter username!
@@ -40,19 +53,17 @@ const LoginForm = () => {
             <Form.Label column sm="6" className="text-left">
               Password
             </Form.Label>
-            <Col sm="8">
+            <Col sm="12">
               <InputGroup className="mb-3">
                 <Form.Control
-                  type="password"
+                  type={inputName}
                   name="password"
+                  onChange={checkInputName}
                   style={{ height: "1.8rem" }}
                   required
-                  // {...register("password")}"fas fa-eye"
+                  {...register("password")}
                 />
-                <InputGroup.Text
-                  id="basic-addon2"
-                  onClick={showPasswordHandler}
-                >
+                <InputGroup.Text onClick={showPasswordHandler}>
                   {showPass ? <EyeFill /> : <EyeSlashFill />}
                 </InputGroup.Text>
               </InputGroup>
@@ -74,11 +85,9 @@ const LoginForm = () => {
         </Col>
       </Row>
       <Row style={{ paddingTop: "0.4rem" }}>
-        <Col></Col>
-        <Col>
-          <Button size="md" variant="success">
-            Login
-          </Button>
+        <Col sm="8"></Col>
+        <Col style={{ textAlign: "right" }}>
+          <Button variant="success">Login</Button>
         </Col>
       </Row>
     </Container>

@@ -22,7 +22,7 @@ const Index = () => {
   };
 
   return (
-    <FormProvider {...methods}>
+    <FormProvider {...methods} >
       <Form onSubmit={methods.handleSubmit(onSubmit)}>
         <SignForm />
       </Form>
