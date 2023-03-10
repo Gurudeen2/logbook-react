@@ -12,7 +12,7 @@ const Index = () => {
       const docRef = await addDoc(collection(db, "logbook"), {
         logbook: data,
       });
-      console.log("docRef",docRef);
+      console.log("docRef", docRef);
       // check network error
     } catch (e) {
       console.error("Error adding document: ", e);
