@@ -6,6 +6,7 @@ import LogList from "./components/Admin/LogList";
 import Footer from "./components/Footer/Footer";
 import PageNotFound from "./components/Pages/PageNotFound";
 import "./App.css";
+import Login from "./components/Admin/Login/Login";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
           </Route>
           <Route path="/viewlogs">
             <LogList />
+          </Route>
+          <Route path="/admin/login">
+            <Login />
           </Route>
           <Route path="*">
             <PageNotFound />

@@ -1,12 +1,22 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Form, Col, Row, Image } from "react-bootstrap";
+import Card from "../../UI/Card";
+import LoginForm from "./LoginForm";
 
 const Login = () => {
   return (
-    <Container fluid>
-      <Col></Col>
-      <Col></Col>
-    </Container>
+    <Card>
+      <Row>
+        <Col sm="6">
+          <Form>
+            <LoginForm />
+          </Form>
+        </Col>
+        <Col sm="6">
+          <Image src="" width="100%" alt="Login Image" />
+        </Col>
+      </Row>
+    </Card>
   );
 };
 export default Login;
