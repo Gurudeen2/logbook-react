@@ -1,10 +1,16 @@
-import React from "react";
-import { Button, Col, Container, Row, Form } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Col, Container, Row, Form, InputGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { EyeSlashFill, EyeFill } from "react-bootstrap-icons";
 
 import classes from "./LoginForm.module.css";
 
 const LoginForm = () => {
+  const [showPass, setShowPas] = useState(false);
+  const showPasswordHandler = () => {
+    setShowPas(true);
+  };
+
   return (
     <Container>
       <Row>
@@ -35,13 +41,22 @@ const LoginForm = () => {
               Password
             </Form.Label>
             <Col sm="8">
-              <Form.Control
-                type="password"
-                name="password"
-                style={{ height: "1.8rem" }}
-                required
-                // {...register("password")}
-              />
+              <InputGroup className="mb-3">
+                <Form.Control
+                  type="password"
+                  name="password"
+                  style={{ height: "1.8rem" }}
+                  required
+                  // {...register("password")}"fas fa-eye"
+                />
+                <InputGroup.Text
+                  id="basic-addon2"
+                  onClick={showPasswordHandler}
+                >
+                  {showPass ? <EyeFill /> : <EyeSlashFill />}
+                </InputGroup.Text>
+              </InputGroup>
+
               <Form.Control.Feedback type="invalid">
                 Please enter Password!
               </Form.Control.Feedback>
@@ -61,7 +76,9 @@ const LoginForm = () => {
       <Row style={{ paddingTop: "0.4rem" }}>
         <Col></Col>
         <Col>
-          <Button size="md" variant="success">Login</Button>
+          <Button size="md" variant="success">
+            Login
+          </Button>
         </Col>
       </Row>
     </Container>
