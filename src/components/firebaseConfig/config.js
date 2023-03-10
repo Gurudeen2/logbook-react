@@ -4,7 +4,7 @@ import { getFirestore } from "firebase/firestore";
 // Your web app's Firebase configuration
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDhWhFfRLQcjt9b32VWS-UdafLsURRjBQ8",
+  apiKey: `${process.env.REACT_APP_API_KEY}`,
   authDomain: "mcandb-b70a4.firebaseapp.com",
   projectId: "mcandb-b70a4",
   storageBucket: "mcandb-b70a4.appspot.com",
@@ -28,13 +28,3 @@ export const db = getFirestore(app);
 //     }
 //   }
 // }
-
-// const firebaseConfig = {
-//   apiKey: "AIzaSyDhWhFfRLQcjt9b32VWS-UdafLsURRjBQ8",
-//   authDomain: "mcandb-b70a4.firebaseapp.com",
-//   projectId: "mcandb-b70a4",
-//   storageBucket: "mcandb-b70a4.appspot.com",
-//   messagingSenderId: "206328197335",
-//   appId: "1:206328197335:web:fcb6351048e146e8b98092",
-//   measurementId: "G-QBN43WCG5H",
-// };
