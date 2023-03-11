@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Form } from "react-bootstrap";
 import SignForm from "./SignForm";
@@ -12,6 +12,8 @@ const Index = () => {
   const [header, setHeader] = useState("");
   const [info, setInfo] = useState("");
 
+  const reset = useRef();
+
   const onShowHandler = () => {
     setOnShow(true);
   };
@@ -21,33 +23,34 @@ const Index = () => {
   };
 
   const onSubmit = async (data) => {
-    try {
-      const docRef = await addDoc(collection(db, "logbook"), {
-        logbook: data,
-      });
+    // try {
+    //   const docRef = await addDoc(collection(db, "logbook"), {
+    //     logbook: data,
+    //   });
 
-      if (docRef.id !== "") {
-        setHeader("Success");
-        setInfo("Record Successfully Saved!");
-      } else {
-        setHeader("Error");
-        setInfo("Record Not Saved!");
-      }
-      // check network error
-    } catch (e) {
-      setHeader("Error");
-      setInfo(e);
-    }
+    //   if (docRef.id !== "") {
+    //     setHeader("Success");
+    //     setInfo("Record Successfully Saved!");
+    //   } else {
+    //     setHeader("Error");
+    //     setInfo("Record Not Saved!");
+    //   }
+    //   // check network error
+    // } catch (e) {
+    //   setHeader("Error");
+    //   setInfo(e);
+    // }
     onShowHandler();
+    reset.current.reset();
     console.log("Register/Index", data);
   };
 
   return (
     <FormProvider {...methods}>
       {onShow && (
-        <ModalAlert onClose={onHideHandler} header={header} info={info} />
+        <ModalAlert onClose={onHideHandler} header={header} content={info} />
       )}
-      <Form onSubmit={methods.handleSubmit(onSubmit)}>
+      <Form onSubmit={methods.handleSubmit(onSubmit)} ref={reset}>
         <SignForm />
       </Form>
     </FormProvider>

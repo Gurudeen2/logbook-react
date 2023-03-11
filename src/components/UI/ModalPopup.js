@@ -5,11 +5,12 @@ import classes from "./ModalPopup.module.css";
 const ModalAlert = (props) => {
   return (
     <Modal onClose={props.onClose}>
-          <div>{ props.header}</div>
-          <div>{ props.info}</div>
+      <div className={classes.header}>{props.header}</div>
+      <hr />
+      <div className={classes.content}>{props.content}</div>
+      <hr />
       <div className={classes.actions}>
         <button onClick={props.onClose}>Close</button>
-        <button className={classes.button}>Order</button>
       </div>
     </Modal>
   );
