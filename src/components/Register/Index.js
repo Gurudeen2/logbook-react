@@ -23,23 +23,23 @@ const Index = () => {
   };
 
   const onSubmit = async (data) => {
-    // try {
-    //   const docRef = await addDoc(collection(db, "logbook"), {
-    //     logbook: data,
-    //   });
+    try {
+      const docRef = await addDoc(collection(db, "logbook"), {
+        logbook: data,
+      });
 
-    //   if (docRef.id !== "") {
-    //     setHeader("Success");
-    //     setInfo("Record Successfully Saved!");
-    //   } else {
-    //     setHeader("Error");
-    //     setInfo("Record Not Saved!");
-    //   }
-    //   // check network error
-    // } catch (e) {
-    //   setHeader("Error");
-    //   setInfo(e);
-    // }
+      if (docRef.id !== "") {
+        setHeader("Success");
+        setInfo("Record Successfully Saved!");
+      } else {
+        setHeader("Error");
+        setInfo("Record Not Saved!");
+      }
+      // check network error
+    } catch (e) {
+      setHeader("Error");
+      setInfo(e);
+    }
     onShowHandler();
     reset.current.reset();
     console.log("Register/Index", data);
