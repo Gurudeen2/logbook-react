@@ -36,12 +36,13 @@ const LoginForm = () => {
               <Form.Control
                 type="text"
                 name="username"
+                placeholder="Username or Email"
                 style={{ height: "1.8rem" }}
                 required
                 {...register("username")}
               />
               <Form.Control.Feedback type="invalid">
-                Please enter username!
+                Please enter username ore email!
               </Form.Control.Feedback>
             </Col>
           </Form.Group>
@@ -87,7 +88,7 @@ const LoginForm = () => {
       <Row style={{ paddingTop: "0.4rem" }}>
         <Col sm="8"></Col>
         <Col style={{ textAlign: "right" }}>
-          <Button variant="success">Login</Button>
+          <Button variant="success" type="submit">Login</Button>
         </Col>
       </Row>
     </Container>

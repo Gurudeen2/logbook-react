@@ -128,18 +128,7 @@ const LogList = () => {
     fetchPost();
   }, [fetchPost]);
 
-  // description: "signin";
-  // fullname: "Fatai Akeem";
-  // gender: "Male";
-  // id: "dBCRjVPCHAgrmjf7DPzF";
-  // mobilenumber: "08063641230";
-  // nextofkin: "Toyin";
-  // nextofkinno: "0806361234";
-  // signdate: "2023-03-03";
-  // state: "Ogun State";
-
   const searchHandler = (e) => {
-    console.log("142", e.target.value.trim());
     if (e.target.value.trim() !== "") {
       const filteredData = logList.filter(
         (list) =>
@@ -150,7 +139,6 @@ const LogList = () => {
       setLogList(filteredData);
     }
   };
- 
 
   return (
     <Card>
