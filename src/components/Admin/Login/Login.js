@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import { Form, Col, Row, Image } from "react-bootstrap";
-import {
-  getDocs,
-  collection,
-  where,
-  updateDoc,
-  query,
-} from "firebase/firestore";
+import { getDocs, collection } from "firebase/firestore";
 import LoginForm from "./LoginForm";
 import ModalAlert from "../../UI/ModalPopup";
 import { FormProvider, useForm } from "react-hook-form";
@@ -17,10 +11,18 @@ const Login = () => {
   const methods = useForm();
   const [header, setHeader] = useState();
   const [content, setContent] = useState();
+  const [showModal, setShowModal] = useState(false);
+
+  const showModalHandler = () => {
+    setShowModal(true);
+  };
+
+  const hideModalHandler = () => {
+    setShowModal(false);
+  };
 
   const onSubmitHandler = async (data) => {
     console.log("login details", data);
-    
 
     await getDocs(collection(db, "users")).then((userdoc) => {
       const newData = userdoc.docs.map((user) => ({
@@ -54,12 +56,20 @@ const Login = () => {
         setContent("Incorrect Username or Email");
       }
     });
+    showModalHandler();
   };
 
   return (
     <Row>
       <Col sm="4">
-        {/* <ModalAlert header content /> */}
+        {show && (
+          <ModalAlert
+            header={header}
+            content={content}
+            onClose={hideModalHandler}
+          />
+        )}
+
         <FormProvider {...methods}>
           <Form onSubmit={methods.handleSubmit(onSubmitHandler)}>
             <LoginForm />
