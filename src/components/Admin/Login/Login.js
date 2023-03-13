@@ -10,6 +10,7 @@ import {
 import LoginForm from "./LoginForm";
 import ModalAlert from "../../UI/ModalPopup";
 import { FormProvider, useForm } from "react-hook-form";
+import { db } from "../../firebaseConfig/config";
 import image from "../../../assets/images/log.jpg";
 
 const Login = () => {
@@ -19,19 +20,19 @@ const Login = () => {
 
   const onSubmitHandler = async (data) => {
     console.log("login details", data);
-    const q = query(
+    const qa = query(
       collection(db, "logbook"),
-      where(
-        ("username", "==", data.username) && ("password", "==", data.password)
-      )
+      where("gender", "=", "Male")
     );
-    await getDocs(q).then((users) => {
-      const usersData = users.docs.map((user) => ({
-        ...user.data(),
-        id: user.id,
-      }));
-      console.log("userData", usersData);
-    });
+    const docData = await getDocs(qa);
+    console.log("userData", docData);
+
+    //   .then((users) => {
+    //   const usersData = users.docs.map((user) => ({
+    //     ...user.data(),
+    //     id: user.id,
+    //   }));
+    // });
 
     // await getDocs(collection(db, "users")).then((userdoc) => {
     //   const newData = userdoc.docs.map((user) => ({
@@ -70,7 +71,7 @@ const Login = () => {
   return (
     <Row>
       <Col sm="4">
-        <ModalAlert header content />
+        {/* <ModalAlert header content /> */}
         <FormProvider {...methods}>
           <Form onSubmit={methods.handleSubmit(onSubmitHandler)}>
             <LoginForm />
