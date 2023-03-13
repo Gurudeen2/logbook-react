@@ -6,7 +6,11 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.css";
 import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
-import { getDocs, collection, query, where } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+ 
+} from "firebase/firestore";
 import { db } from "../firebaseConfig/config";
 import "./LogList.css";
 
@@ -101,13 +105,9 @@ const LogList = () => {
   };
 
   const fetchPost = useCallback(async () => {
-    const ref = collection(db, "logbook");
-    const a = "Male";
-    const q = query(ref, where("gender", "==", `${a}`));
-    const doc_refs = await getDocs(query(ref, where("state", "==", "Lagos")));
-    console.log("tola", doc_refs);
-    
-    await getDocs(collection(db, "logbook")).then((logdoc) => {
+  
+
+    await getDocs(collection(db, "users")).then((logdoc) => {
       const newData = logdoc.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,

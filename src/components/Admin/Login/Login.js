@@ -20,52 +20,40 @@ const Login = () => {
 
   const onSubmitHandler = async (data) => {
     console.log("login details", data);
-    const qa = query(
-      collection(db, "logbook"),
-      where("gender", "=", "Male")
-    );
-    const docData = await getDocs(qa);
-    console.log("userData", docData);
+    
 
-    //   .then((users) => {
-    //   const usersData = users.docs.map((user) => ({
-    //     ...user.data(),
-    //     id: user.id,
-    //   }));
-    // });
-
-    // await getDocs(collection(db, "users")).then((userdoc) => {
-    //   const newData = userdoc.docs.map((user) => ({
-    //     ...user.data(),
-    //     id: user.id,
-    //   }));
-    //   let usersData = [];
-    //   for (let key in newData) {
-    //     usersData.push({
-    //       id: newData[key].id,
-    //       username: newData[key].users.username,
-    //       email: newData[key].users.email,
-    //       password: newData[key].users.password,
-    //       lastlogin: newData[key].users.lastlogin,
-    //     });
-    //   }
-    //   if (
-    //     usersData[0].email === data.username ||
-    //     usersData[0].username === data.username
-    //   ) {
-    //     if (usersData[0].password === data.password) {
-    //       setHeader("Success");
-    //       setContent("Login Successful");
-    //     } else {
-    //       console.log("incorrect Password");
-    //       setHeader("Failed");
-    //       setContent("Incorrect Password");
-    //     }
-    //   } else {
-    //     setHeader("Failed");
-    //     setContent("Incorrect Username or Email");
-    //   }
-    // });
+    await getDocs(collection(db, "users")).then((userdoc) => {
+      const newData = userdoc.docs.map((user) => ({
+        ...user.data(),
+        id: user.id,
+      }));
+      let usersData = [];
+      for (let key in newData) {
+        usersData.push({
+          id: newData[key].id,
+          username: newData[key].users.username,
+          email: newData[key].users.email,
+          password: newData[key].users.password,
+          lastlogin: newData[key].users.lastlogin,
+        });
+      }
+      if (
+        usersData[0].email === data.username ||
+        usersData[0].username === data.username
+      ) {
+        if (usersData[0].password === data.password) {
+          setHeader("Success");
+          setContent("Login Successful");
+        } else {
+          console.log("incorrect Password");
+          setHeader("Failed");
+          setContent("Incorrect Password");
+        }
+      } else {
+        setHeader("Failed");
+        setContent("Incorrect Username or Email");
+      }
+    });
   };
 
   return (
