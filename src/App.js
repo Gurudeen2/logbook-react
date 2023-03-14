@@ -7,6 +7,7 @@ import Footer from "./components/Footer/Footer";
 import PageNotFound from "./components/Pages/PageNotFound";
 import "./App.css";
 import Login from "./components/Admin/Login/Login";
+import ForgetPassword from "./components/Admin/ForgetPassword/ForgetPassword";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <PageNotFound />
           </Route>
         </Switch>
+        <ForgetPassword />
       </main>
       <Footer />
     </>

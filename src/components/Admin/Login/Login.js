@@ -62,7 +62,7 @@ const Login = () => {
   return (
     <Row>
       <Col sm="4">
-        {show && (
+        {showModal && (
           <ModalAlert
             header={header}
             content={content}
@@ -72,6 +72,7 @@ const Login = () => {
 
         <FormProvider {...methods}>
           <Form onSubmit={methods.handleSubmit(onSubmitHandler)}>
+            <h4>Login</h4>
             <LoginForm />
           </Form>
         </FormProvider>

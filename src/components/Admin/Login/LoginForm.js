@@ -88,7 +88,9 @@ const LoginForm = () => {
       <Row style={{ paddingTop: "0.4rem" }}>
         <Col sm="8"></Col>
         <Col style={{ textAlign: "right" }}>
-          <Button variant="success" type="submit">Login</Button>
+          <Button variant="success" type="submit">
+            Login
+          </Button>
         </Col>
       </Row>
     </Container>
