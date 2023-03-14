@@ -17,7 +17,12 @@ const ForgetPassword = () => {
     };
 
     emailjs
-      .send("service_bhj0dj9", "template_4266rip", body, "TkIEarjYb_NGQz9WZ")
+      .send(
+        `${process.env.REACT_APP_SERVICEID}`,
+        `${process.env.REACT_APP_TEMPLATEID}`,
+        body,
+        `${process.env.REACT_APP_PUBLICSADDRESS}`
+      )
       .then((response) => {
         console.log(response.status);
       })
