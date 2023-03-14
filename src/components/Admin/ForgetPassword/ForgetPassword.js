@@ -2,43 +2,32 @@ import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { Form } from "react-bootstrap";
 import ForgetPasswordForm from "./ForgetPasswordForm";
+import emailjs from "@emailjs/browser";
 
 const ForgetPassword = () => {
   const methods = useForm();
 
   const verifyMail = async (data) => {
-    const body = {
-      service_id: "service_bhj0dj9",
-      template_id: "template_4266rip",
-      user_id: "RWW4ceiL2At5kTAKE",
-      template_params: {
-        from_name: "James",
-        to_name: "akeemtolani2@gmail.com",
-        message: "content msg",
-        reply_to: "don't reply to this image",
-      },
-    };
-
-    emailjs.send("service_bhj0dj9", "template_4266rip", {
-      from_name: "Tolani MCAN",
-      to_name: "akeemtolani2@gmail.com",
+    let body = {
+      from_name: "ADMIN",
+      to_name: "MCANNA",
       message: "content msg",
       reply_to: "don't reply to this image",
-    });
-    const sendEmail = await fetch(
-      "https://api.emailjs.com/api/v1.0/email/send",
-      {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Context-Type": "application/json",
-        },
-      }
-    );
+      send_to: data.email,
+    };
+
+    emailjs
+      .send("service_bhj0dj9", "template_4266rip", body, "TkIEarjYb_NGQz9WZ")
+      .then((response) => {
+        console.log(response.status);
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
   };
   return (
     <FormProvider {...methods}>
-      <Form>
+      <Form onSubmit={methods.handleSubmit(verifyMail)}>
         <ForgetPasswordForm />
       </Form>
     </FormProvider>
