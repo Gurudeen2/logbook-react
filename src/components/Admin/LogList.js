@@ -107,7 +107,7 @@ const LogList = () => {
   const fetchPost = useCallback(async () => {
   
 
-    await getDocs(collection(db, "users")).then((logdoc) => {
+    await getDocs(collection(db, "logbook")).then((logdoc) => {
       const newData = logdoc.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,

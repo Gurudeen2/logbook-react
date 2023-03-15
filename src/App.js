@@ -24,11 +24,13 @@ function App() {
           <Route path="/admin/login">
             <Login />
           </Route>
+          <Route path="/admin/forgetpassword">
+            <ForgetPassword />
+          </Route>
           <Route path="*">
             <PageNotFound />
           </Route>
         </Switch>
-        <ForgetPassword />
       </main>
       <Footer />
     </>
