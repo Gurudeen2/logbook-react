@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "../UI/Card";
+import ModalAlert from "../UI/ModalPopup";
 import paginationFactory from "react-bootstrap-table2-paginator";
-import "react-bootstrap-table-next/dist/react-bootstrap-table2.css";
-import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
+// import "react-bootstrap-table-next/dist/react-bootstrap-table2.css";
+// import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebaseConfig/config";
@@ -12,6 +13,17 @@ import "./LogList.css";
 
 const LogList = () => {
   const [logList, setLogList] = useState([]);
+  const [header, setHeader] = useState();
+  const [content, setContent] = useState();
+  const [showModal, setShowModal] = useState(false);
+
+  const showModalHandler = () => {
+    setShowModal(true);
+  };
+
+  const hideModalHandler = () => {
+    setShowModal(false);
+  };
 
   const columns = [
     {
@@ -101,27 +113,34 @@ const LogList = () => {
   };
 
   const fetchPost = useCallback(async () => {
-    await getDocs(collection(db, "logbook")).then((logdoc) => {
-      const newData = logdoc.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      let transData = [];
-      for (let key in newData) {
-        transData.push({
-          id: newData[key].id,
-          fullname: newData[key].logbook.fullname,
-          gender: newData[key].logbook.gender,
-          nextofkin: newData[key].logbook.nextofkin,
-          nextofkinno: newData[key].logbook.nextofkinno,
-          status: newData[key].logbook.status,
-          signdate: newData[key].logbook.signdate,
-          state: newData[key].logbook.state,
-          mobilenumber: newData[key].logbook.mobilenumber,
-        });
-      }
-      setLogList(transData);
-    });
+    await getDocs(collection(db, "logbook"))
+      .then((logdoc) => {
+        const newData = logdoc.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        let transData = [];
+        for (let key in newData) {
+          transData.push({
+            id: newData[key].id,
+            fullname: newData[key].logbook.fullname,
+            gender: newData[key].logbook.gender,
+            nextofkin: newData[key].logbook.nextofkin,
+            nextofkinno: newData[key].logbook.nextofkinno,
+            status: newData[key].logbook.status,
+            signdate: newData[key].logbook.signdate,
+            state: newData[key].logbook.state,
+            mobilenumber: newData[key].logbook.mobilenumber,
+          });
+        }
+        setLogList(transData);
+      })
+      .catch((err) => {
+        console.log("error", err);
+        setContent(err.message);
+        setHeader("Failed");
+        showModalHandler();
+      });
   }, []);
 
   useEffect(() => {
@@ -142,7 +161,13 @@ const LogList = () => {
 
   return (
     <Card>
-      <h3>Log List</h3>
+      {showModal && (
+        <ModalAlert
+          header={header}
+          content={content}
+          onClose={hideModalHandler}
+        />
+      )}
       <Container fluid style={{ paddingBottom: "0.3rem" }}>
         <Row style={{ textAlign: "left" }}>
           <Col sm="12" md="8" lg="9">
