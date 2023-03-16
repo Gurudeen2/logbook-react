@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Form, Col, Row, Image } from "react-bootstrap";
 // import { getDocs, collection } from "firebase/firestore";
 import { useHistory } from "react-router-dom";
 import LoginForm from "./LoginForm";
+import AuthContext from "../../store/auth-context";
 import ModalAlert from "../../UI/ModalPopup";
 import { FormProvider, useForm } from "react-hook-form";
 // import { db } from "../../firebaseConfig/config";
@@ -14,6 +15,8 @@ const Login = () => {
   const [header, setHeader] = useState();
   const [content, setContent] = useState();
   const [showModal, setShowModal] = useState(false);
+
+  const authctx = useContext(AuthContext);
 
   const showModalHandler = () => {
     setShowModal(true);
@@ -51,7 +54,12 @@ const Login = () => {
       })
       .then((res) => {
         console.log("2 then", res);
-        navigate.push("/viewlogs");
+
+        const expirationTime = new Date(
+          new Date().getTime() + +data.expiresIn * 1000
+        );
+        authCtx.login(data.idToken, expirationTime.toISOString());
+        navigate.replace("/viewlogs");
       })
       .catch((err) => {
         setHeader("Login");
