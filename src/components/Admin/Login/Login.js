@@ -30,7 +30,11 @@ const Login = () => {
       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDhWhFfRLQcjt9b32VWS-UdafLsURRjBQ8",
       {
         method: "POST",
-        body: JSON.stringify(),
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+          returnSecureToken: true,
+        }),
         header: {
           "Content-Type": "application/json",
         },
