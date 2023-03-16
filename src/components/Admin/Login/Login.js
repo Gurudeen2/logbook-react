@@ -39,39 +39,48 @@ const Login = () => {
           "Content-Type": "application/json",
         },
       }
-    );
-
-    await getDocs(collection(db, "users")).then((userdoc) => {
-      const newData = userdoc.docs.map((user) => ({
-        ...user.data(),
-        id: user.id,
-      }));
-      let usersData = [];
-      for (let key in newData) {
-        usersData.push({
-          id: newData[key].id,
-          username: newData[key].username,
-          email: newData[key].email,
-          password: newData[key].password,
-          lastlogin: newData[key].lastlogin,
-        });
-      }
-      const verifiedLogins = usersData.filter((login) => {
-        const loginCheck =
-          (login.username === data.username &&
-            login.password === data.password) ||
-          (login.email === data.username && login.password === data.password);
-        return loginCheck;
+    )
+      .then((res) => {
+        console.log("1 then", res);
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then((res) => {
+        console.log("2 then", res);
       });
-      if (verifiedLogins.length > 0) {
-        // localStorage.setItem("auth", true);
-        navigate.push("/viewlogs");
-      } else {
-        setHeader("Failed");
-        setContent("Incorrect Username or Email");
-        showModalHandler();
-      }
-    });
+
+    // await getDocs(collection(db, "users")).then((userdoc) => {
+    //   const newData = userdoc.docs.map((user) => ({
+    //     ...user.data(),
+    //     id: user.id,
+    //   }));
+    //   let usersData = [];
+    //   for (let key in newData) {
+    //     usersData.push({
+    //       id: newData[key].id,
+    //       username: newData[key].username,
+    //       email: newData[key].email,
+    //       password: newData[key].password,
+    //       lastlogin: newData[key].lastlogin,
+    //     });
+    //   }
+    //   const verifiedLogins = usersData.filter((login) => {
+    //     const loginCheck =
+    //       (login.username === data.username &&
+    //         login.password === data.password) ||
+    //       (login.email === data.username && login.password === data.password);
+    //     return loginCheck;
+    //   });
+    //   if (verifiedLogins.length > 0) {
+    //     // localStorage.setItem("auth", true);
+    //     navigate.push("/viewlogs");
+    //   } else {
+    //     setHeader("Failed");
+    //     setContent("Incorrect Username or Email");
+    //     showModalHandler();
+    //   }
+    // });
   };
 
   return (
