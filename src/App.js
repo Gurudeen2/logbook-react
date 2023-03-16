@@ -1,7 +1,8 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useContext } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+
 import "./App.css";
 
 const Index = React.lazy(() => import("./components/Register/Index"));
@@ -14,6 +15,8 @@ const PageNotFound = React.lazy(() =>
   import("./components/Pages/PageNotFound")
 );
 function App() {
+  const authCtx = useContext(AuthContext);
+
   return (
     <Suspense fallback={<p>Loading...</p>}>
       <Header title="LogBook" />
@@ -25,13 +28,17 @@ function App() {
           <Route path="/addlog">
             <Index />
           </Route>
+
           <Route path="/viewlogs">
-            <LogList />
+            {authCtx.isLoggedIn && <LogList />}
+            {!authCtx.isLoggedIn && <Redirect to="/admin/login" />}
           </Route>
 
-          <Route path="/admin/login">
-            <Login />
-          </Route>
+          {!authCtx.isLoggedIn && (
+            <Route path="/admin/login">
+              <Login />
+            </Route>
+          )}
 
           <Route path="/admin/forgetpassword">
             <ForgetPassword />
