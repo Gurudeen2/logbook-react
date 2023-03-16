@@ -10,20 +10,28 @@ import Login from "./components/Admin/Login/Login";
 import ForgetPassword from "./components/Admin/ForgetPassword/ForgetPassword";
 
 function App() {
+  const auth = localStorage.getItem("auth");
+  console.log("auth", auth);
   return (
     <>
       <Header title="LogBook" />
       <main>
         <Switch>
-          <Route path="/addlog">
-            <Index />
-          </Route>
-          <Route path="/viewlogs">
-            <LogList />
-          </Route>
-          <Route path="/admin/login">
-            <Login />
-          </Route>
+          {auth ? (
+            <>
+              <Route path="/addlog">
+                <Index />
+              </Route>
+              <Route path="/viewlogs">
+                <LogList />
+              </Route>
+            </>
+          ) : (
+            <Route path="/admin/login">
+              <Login />
+            </Route>
+          )}
+
           <Route path="/admin/forgetpassword">
             <ForgetPassword />
           </Route>
