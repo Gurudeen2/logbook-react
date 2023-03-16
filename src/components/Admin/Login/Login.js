@@ -15,7 +15,8 @@ const Login = () => {
   const [content, setContent] = useState();
   const [showModal, setShowModal] = useState(false);
 
-
+  // AIzaSyDhWhFfRLQcjt9b32VWS - UdafLsURRjBQ8;
+  // https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]
   const showModalHandler = () => {
     setShowModal(true);
   };
@@ -25,6 +26,17 @@ const Login = () => {
   };
 
   const onSubmitHandler = async (data) => {
+    fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDhWhFfRLQcjt9b32VWS-UdafLsURRjBQ8",
+      {
+        method: "POST",
+        body: JSON.stringify(),
+        header: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
     await getDocs(collection(db, "users")).then((userdoc) => {
       const newData = userdoc.docs.map((user) => ({
         ...user.data(),
@@ -51,7 +63,6 @@ const Login = () => {
         // localStorage.setItem("auth", true);
         navigate.push("/viewlogs");
       } else {
-
         setHeader("Failed");
         setContent("Incorrect Username or Email");
         showModalHandler();

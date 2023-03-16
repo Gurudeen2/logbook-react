@@ -17,20 +17,16 @@ function App() {
       <Header title="LogBook" />
       <main>
         <Switch>
-          {auth ? (
-            <>
-              <Route path="/addlog">
-                <Index />
-              </Route>
-              <Route path="/viewlogs">
-                <LogList />
-              </Route>
-            </>
-          ) : (
-            <Route path="/admin/login">
-              <Login />
-            </Route>
-          )}
+          <Route path="/addlog">
+            <Index />
+          </Route>
+          <Route path="/viewlogs">
+            <LogList />
+          </Route>
+
+          <Route path="/admin/login">
+            <Login />
+          </Route>
 
           <Route path="/admin/forgetpassword">
             <ForgetPassword />
