@@ -1,12 +1,10 @@
 import React, { useState, useContext } from "react";
 import { Form, Col, Row, Image } from "react-bootstrap";
-// import { getDocs, collection } from "firebase/firestore";
 import { useHistory } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import AuthContext from "../../store/auth-context";
 import ModalAlert from "../../UI/ModalPopup";
 import { FormProvider, useForm } from "react-hook-form";
-// import { db } from "../../firebaseConfig/config";
 import image from "../../../assets/images/log.jpg";
 
 const Login = () => {
@@ -16,7 +14,7 @@ const Login = () => {
   const [content, setContent] = useState();
   const [showModal, setShowModal] = useState(false);
 
-  const authctx = useContext(AuthContext);
+  const authCtx = useContext(AuthContext);
 
   const showModalHandler = () => {
     setShowModal(true);
@@ -26,7 +24,7 @@ const Login = () => {
     setShowModal(false);
   };
 
-  const onSubmitHandler = async (data) => {
+  const onSubmitHandler = (data) => {
     fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDhWhFfRLQcjt9b32VWS-UdafLsURRjBQ8",
       {
@@ -66,38 +64,6 @@ const Login = () => {
         setContent(err.message);
         showModalHandler();
       });
-
-    // await getDocs(collection(db, "users")).then((userdoc) => {
-    //   const newData = userdoc.docs.map((user) => ({
-    //     ...user.data(),
-    //     id: user.id,
-    //   }));
-    //   let usersData = [];
-    //   for (let key in newData) {
-    //     usersData.push({
-    //       id: newData[key].id,
-    //       username: newData[key].username,
-    //       email: newData[key].email,
-    //       password: newData[key].password,
-    //       lastlogin: newData[key].lastlogin,
-    //     });
-    //   }
-    //   const verifiedLogins = usersData.filter((login) => {
-    //     const loginCheck =
-    //       (login.username === data.username &&
-    //         login.password === data.password) ||
-    //       (login.email === data.username && login.password === data.password);
-    //     return loginCheck;
-    //   });
-    //   if (verifiedLogins.length > 0) {
-    //     // localStorage.setItem("auth", true);
-    //     navigate.push("/viewlogs");
-    //   } else {
-    //     setHeader("Failed");
-    //     setContent("Incorrect Username or Email");
-    //     showModalHandler();
-    //   }
-    // });
   };
 
   return (
