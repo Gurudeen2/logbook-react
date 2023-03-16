@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Form, Col, Row, Image } from "react-bootstrap";
-import { getDocs, collection } from "firebase/firestore";
+// import { getDocs, collection } from "firebase/firestore";
 import { useHistory } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import ModalAlert from "../../UI/ModalPopup";
 import { FormProvider, useForm } from "react-hook-form";
-import { db } from "../../firebaseConfig/config";
+// import { db } from "../../firebaseConfig/config";
 import image from "../../../assets/images/log.jpg";
 
 const Login = () => {
@@ -15,8 +15,6 @@ const Login = () => {
   const [content, setContent] = useState();
   const [showModal, setShowModal] = useState(false);
 
-  // AIzaSyDhWhFfRLQcjt9b32VWS - UdafLsURRjBQ8;
-  // https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]
   const showModalHandler = () => {
     setShowModal(true);
   };
@@ -31,7 +29,7 @@ const Login = () => {
       {
         method: "POST",
         body: JSON.stringify({
-          email: data.email,
+          email: data.username,
           password: data.password,
           returnSecureToken: true,
         }),
@@ -44,10 +42,21 @@ const Login = () => {
         console.log("1 then", res);
         if (res.ok) {
           return res.json();
+        } else {
+          return res.json().then((res) => {
+            let errorMsg = "Authentication Failed!";
+            throw new Error(errorMsg);
+          });
         }
       })
       .then((res) => {
         console.log("2 then", res);
+        navigate.push("/viewlogs");
+      })
+      .catch((err) => {
+        setHeader("Login");
+        setContent(err.message);
+        showModalHandler();
       });
 
     // await getDocs(collection(db, "users")).then((userdoc) => {

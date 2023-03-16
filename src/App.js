@@ -1,22 +1,27 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
+import React, { Suspense } from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "./components/Header/Header";
-import Index from "./components/Register/Index";
-import LogList from "./components/Admin/LogList";
 import Footer from "./components/Footer/Footer";
-import PageNotFound from "./components/Pages/PageNotFound";
 import "./App.css";
-import Login from "./components/Admin/Login/Login";
-import ForgetPassword from "./components/Admin/ForgetPassword/ForgetPassword";
 
+const Index = React.lazy(() => import("./components/Register/Index"));
+const LogList = React.lazy(() => import("./components/Footer/Footer"));
+const Login = React.lazy(() => import("./components/Admin/Login/Login"));
+const ForgetPassword = React.lazy(() =>
+  import("./components/Admin/ForgetPassword/ForgetPassword")
+);
+const PageNotFound = React.lazy(() =>
+  import("./components/Pages/PageNotFound")
+);
 function App() {
-  const auth = localStorage.getItem("auth");
-  console.log("auth", auth);
   return (
-    <>
+    <Suspense fallback={<p>Loading...</p>}>
       <Header title="LogBook" />
       <main>
         <Switch>
+          <Route path="/" exact>
+            <Redirect to="/addlog" />
+          </Route>
           <Route path="/addlog">
             <Index />
           </Route>
@@ -37,7 +42,7 @@ function App() {
         </Switch>
       </main>
       <Footer />
-    </>
+    </Suspense>
   );
 }
 

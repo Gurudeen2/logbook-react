@@ -42,7 +42,7 @@ const LoginForm = () => {
                 {...register("username")}
               />
               <Form.Control.Feedback type="invalid">
-                Please enter username ore email!
+                Please enter username or email!
               </Form.Control.Feedback>
             </Col>
           </Form.Group>
