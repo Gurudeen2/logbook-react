@@ -25,8 +25,6 @@ const LogList = () => {
 
   const authCtx = useContext(AuthContext);
 
-  console.log("AUth in LogList", authCtx);
-
   const hideModalHandler = () => {
     setShowModal(false);
   };
@@ -142,7 +140,6 @@ const LogList = () => {
         setLogList(transData);
       })
       .catch((err) => {
-        console.log("error", err);
         setContent(err.message);
         setHeader("Failed");
         showModalHandler();

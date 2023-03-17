@@ -17,7 +17,6 @@ const PageNotFound = React.lazy(() =>
 );
 function App() {
   const authCtx = useContext(AuthContext);
-  console.log("authCtx", authCtx.isLoggedIn);
   return (
     <Suspense fallback={<p>Loading...</p>}>
       <Header title="LogBook" />
@@ -31,7 +30,8 @@ function App() {
           </Route>
 
           <Route path="/viewlogs">
-            <LogList />
+            {authCtx.isLoggedIn && <LogList />}
+            {!authCtx.isLoggedIn && <Login />}
           </Route>
 
           {!authCtx.isLoggedIn && (
