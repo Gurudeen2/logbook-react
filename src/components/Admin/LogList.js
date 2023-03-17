@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "../UI/Card";
@@ -9,7 +9,9 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebaseConfig/config";
+
 import "./LogList.css";
+import AuthContext from "../store/auth-context";
 
 const LogList = () => {
   const [logList, setLogList] = useState([]);
@@ -20,6 +22,10 @@ const LogList = () => {
   const showModalHandler = () => {
     setShowModal(true);
   };
+
+  const authCtx = useContext(AuthContext);
+
+  console.log("AUth in LogList", authCtx);
 
   const hideModalHandler = () => {
     setShowModal(false);

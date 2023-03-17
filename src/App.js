@@ -4,9 +4,10 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 
 import "./App.css";
+import AuthContext from "./components/store/auth-context";
 
 const Index = React.lazy(() => import("./components/Register/Index"));
-const LogList = React.lazy(() => import("./components/Footer/Footer"));
+const LogList = React.lazy(() => import("./components/Admin/LogList"));
 const Login = React.lazy(() => import("./components/Admin/Login/Login"));
 const ForgetPassword = React.lazy(() =>
   import("./components/Admin/ForgetPassword/ForgetPassword")
@@ -16,7 +17,7 @@ const PageNotFound = React.lazy(() =>
 );
 function App() {
   const authCtx = useContext(AuthContext);
-
+  console.log("authCtx", authCtx.isLoggedIn);
   return (
     <Suspense fallback={<p>Loading...</p>}>
       <Header title="LogBook" />
@@ -30,8 +31,7 @@ function App() {
           </Route>
 
           <Route path="/viewlogs">
-            {authCtx.isLoggedIn && <LogList />}
-            {!authCtx.isLoggedIn && <Redirect to="/admin/login" />}
+            <LogList />
           </Route>
 
           {!authCtx.isLoggedIn && (

@@ -1,11 +1,11 @@
 import React from "react";
-import { FormProvider, useForm } from "react-hook-form"
+import { FormProvider, useForm } from "react-hook-form";
 import NewUserForm from "./NewUserForm";
 
-const NewUserList = () => {
+const NewUser = () => {
   const methods = useForm();
   const onSubmit = (data) => {
-    console.log("Register/NewUserList", data);
+    console.log("Register/NewUser", data);
   };
 
   return (
@@ -16,4 +16,4 @@ const NewUserList = () => {
     </FormProvider>
   );
 };
-export default NewUserList;
+export default NewUser;

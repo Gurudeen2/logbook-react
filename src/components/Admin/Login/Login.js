@@ -40,7 +40,6 @@ const Login = () => {
       }
     )
       .then((res) => {
-        console.log("1 then", res);
         if (res.ok) {
           return res.json();
         } else {
@@ -51,15 +50,16 @@ const Login = () => {
         }
       })
       .then((res) => {
-        console.log("2 then", res);
-
         const expirationTime = new Date(
-          new Date().getTime() + +data.expiresIn * 1000
+          new Date().getTime() + +res.expiresIn * 1000
         );
-        authCtx.login(data.idToken, expirationTime.toISOString());
+        console.log("check if true", !!res.idToken);
+        console.log("Testing res", expirationTime.toISOString());
+        authCtx.login(res.idToken, expirationTime.toISOString());
         navigate.replace("/viewlogs");
       })
       .catch((err) => {
+        console.log("e", err);
         setHeader("Login");
         setContent(err.message);
         showModalHandler();
