@@ -22,6 +22,7 @@ function App() {
   const authCtx = useContext(AuthContext);
   return (
     <Suspense fallback={<Spinner />}>
+      
       <Header title="LogBook" />
       <main>
         <Switch>
