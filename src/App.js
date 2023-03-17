@@ -1,5 +1,5 @@
 import React, { Suspense, useContext } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 
@@ -36,7 +36,7 @@ function App() {
 
           <Route path="/admin/login">
             {!authCtx.isLoggedIn && <Login />}
-            {authCtx.isLoggedIn && <LogList />}
+            {authCtx.isLoggedIn && <Redirect to="/viewlogs" />}
           </Route>
 
           <Route path="/admin/forgetpassword">
