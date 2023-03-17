@@ -34,11 +34,10 @@ function App() {
             {!authCtx.isLoggedIn && <Login />}
           </Route>
 
-          {!authCtx.isLoggedIn && (
-            <Route path="/admin/login">
-              <Login />
-            </Route>
-          )}
+          <Route path="/admin/login">
+            {!authCtx.isLoggedIn && <Login />}
+            {authCtx.isLoggedIn && <LogList />}
+          </Route>
 
           <Route path="/admin/forgetpassword">
             <ForgetPassword />
