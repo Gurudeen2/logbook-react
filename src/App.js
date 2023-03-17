@@ -1,5 +1,5 @@
 import React, { Suspense, useContext } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 
@@ -22,18 +22,14 @@ function App() {
   const authCtx = useContext(AuthContext);
   return (
     <Suspense fallback={<Spinner />}>
-      
       <Header title="LogBook" />
       <main>
         <Switch>
-          <Route path="/" exact>
-            <Redirect to="/addlog" />
-          </Route>
           <Route path="/addlog">
             <Index />
           </Route>
 
-          <Route path="/viewlogs">
+          <Route path="/" exact>
             {authCtx.isLoggedIn && <LogList />}
             {!authCtx.isLoggedIn && <Login />}
           </Route>

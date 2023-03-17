@@ -53,13 +53,10 @@ const Login = () => {
         const expirationTime = new Date(
           new Date().getTime() + +res.expiresIn * 1000
         );
-        console.log("check if true", !!res.idToken);
-        console.log("Testing res", expirationTime.toISOString());
         authCtx.login(res.idToken, expirationTime.toISOString());
-        navigate.replace("/viewlogs");
+        navigate.replace("/");
       })
       .catch((err) => {
-        console.log("e", err);
         setHeader("Login");
         setContent(err.message);
         showModalHandler();

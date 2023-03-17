@@ -1,17 +1,13 @@
-import React, { useState, useEffect, useCallback, useContext } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
-// import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "../UI/Card";
 import ModalAlert from "../UI/ModalPopup";
 import paginationFactory from "react-bootstrap-table2-paginator";
-// import "react-bootstrap-table-next/dist/react-bootstrap-table2.css";
-// import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebaseConfig/config";
 
 import "./LogList.css";
-import AuthContext from "../store/auth-context";
 
 const LogList = () => {
   const [logList, setLogList] = useState([]);
@@ -23,7 +19,6 @@ const LogList = () => {
     setShowModal(true);
   };
 
-  const authCtx = useContext(AuthContext);
 
   const hideModalHandler = () => {
     setShowModal(false);
