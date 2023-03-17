@@ -54,7 +54,7 @@ const Login = () => {
           new Date().getTime() + +res.expiresIn * 1000
         );
         authCtx.login(res.idToken, expirationTime.toISOString());
-        navigate.replace("/");
+        navigate.replace("/viewlogs");
       })
       .catch((err) => {
         setHeader("Login");

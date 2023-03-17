@@ -25,11 +25,11 @@ function App() {
       <Header title="LogBook" />
       <main>
         <Switch>
-          <Route path="/addlog">
+          <Route path="/">
             <Index />
           </Route>
 
-          <Route path="/" exact>
+          <Route path="/viewlogs" exact>
             {authCtx.isLoggedIn && <LogList />}
             {!authCtx.isLoggedIn && <Login />}
           </Route>
