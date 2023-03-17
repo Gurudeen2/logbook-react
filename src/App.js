@@ -15,10 +15,13 @@ const ForgetPassword = React.lazy(() =>
 const PageNotFound = React.lazy(() =>
   import("./components/Pages/PageNotFound")
 );
+
+const Spinner = React.lazy(() => import("./components/UI/Spinner"));
+
 function App() {
   const authCtx = useContext(AuthContext);
   return (
-    <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<Spinner />}>
       <Header title="LogBook" />
       <main>
         <Switch>
