@@ -73,15 +73,17 @@ const Login = () => {
         />
       )}
 
-      <Col xs="5" sm="4" md="4" lg="2">
+      <Col xs="5" sm="4" md="4" lg="3">
         <FormProvider {...methods}>
           <Form onSubmit={methods.handleSubmit(onSubmitHandler)}>
             <LoginForm />
           </Form>
         </FormProvider>
       </Col>
-      <Col xs="7" sm="8" md="8" lg="10">
-        <Image src={image} width="100%" alt="Login Image" />
+      <Col xs="7" sm="8" md="8" lg="9">
+        <Image src={image}  fluid alt="Login Image" style={{
+  
+        }}/>
       </Col>
     </Row>
   );
