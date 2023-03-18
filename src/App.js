@@ -5,6 +5,7 @@ import Footer from "./components/Footer/Footer";
 
 import "./App.css";
 import AuthContext from "./components/store/auth-context";
+import Sidebar from "./components/UI/Sidebar/SideBar";
 
 const Index = React.lazy(() => import("./components/Register/Index"));
 const LogList = React.lazy(() => import("./components/Admin/LogList"));
@@ -22,7 +23,12 @@ function App() {
   const authCtx = useContext(AuthContext);
   return (
     <Suspense fallback={<Spinner />}>
+      <div style={{ display: "flex" }}>
+
       <Header title="LogBook" />
+
+      <Sidebar />
+
       <main>
         <Switch>
           <Route path="/" exact>
@@ -48,6 +54,7 @@ function App() {
         </Switch>
       </main>
       <Footer />
+      </div>
     </Suspense>
   );
 }
