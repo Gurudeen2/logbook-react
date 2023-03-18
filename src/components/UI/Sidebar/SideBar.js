@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   CDBSidebar,
   CDBSidebarContent,
@@ -8,15 +8,16 @@ import {
   CDBSidebarMenuItem,
 } from "cdbreact";
 import { NavLink } from "react-router-dom";
+import AuthContext from "../../store/auth-context";
 
 const Sidebar = () => {
+  const authCtx = useContext(AuthContext);
   return (
     <div
       style={{
         display: "flex",
         height: "inherit",
         overflow: "scroll initial",
-        paddingTop: "5rem",
       }}
     >
       <CDBSidebar textColor="#fff" backgroundColor="#8a2b06">
@@ -32,35 +33,20 @@ const Sidebar = () => {
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/" activeClassName="activeClicked">
+            {/* <NavLink exact to="/" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/tables" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Tables</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/profile" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/analytics" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line">
-                Analytics
-              </CDBSidebarMenuItem>
-            </NavLink>
-
-            <NavLink
-              exact
-              to="/hero404"
-              target="_blank"
-              activeClassName="activeClicked"
-            >
-              <CDBSidebarMenuItem icon="exclamation-circle">
-                404 page
+            </NavLink> */}
+            <NavLink exact to="/viewlogs" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">
+                View Registers
               </CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
 
           <CDBSidebarFooter style={{ textAlign: "center" }}>
-            <CDBSidebarMenuItem icon="chart-line">LOGOUT</CDBSidebarMenuItem>
+            <CDBSidebarMenuItem icon="chart-line" onClick={authCtx.logout}>
+              LOGOUT
+            </CDBSidebarMenuItem>
           </CDBSidebarFooter>
         </CDBSidebarContent>
       </CDBSidebar>

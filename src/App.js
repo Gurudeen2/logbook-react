@@ -32,14 +32,14 @@ function App() {
               <Index />
             </Route>
 
-            <Route path="/viewlogs">
+            <Route path="/viewlogs" exact>
               {authCtx.isLoggedIn && <LogList />}
-              {!authCtx.isLoggedIn && <Login />}
+              {!authCtx.isLoggedIn && <Redirect to="/admin/login" exact />}
             </Route>
 
-            <Route path="/admin/login">
+            <Route path="/admin/login" exact>
               {!authCtx.isLoggedIn && <Login />}
-              {authCtx.isLoggedIn && <Redirect to="/viewlogs" />}
+              {authCtx.isLoggedIn && <Redirect to="/viewlogs" exact />}
             </Route>
 
             <Route path="/admin/forgetpassword">

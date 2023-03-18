@@ -6,7 +6,7 @@ const SignForm = () => {
   const { register } = useFormContext();
   let date = new Date();
   return (
-    <Container style={{ marginBottom: "5rem" }}>
+    <Container style={{ marginBottom: "5rem", paddingLeft:"5rem" }}>
       <h5 style={{ paddingTop: "1rem" }}>Sign In/Out</h5>
       <br />
 

@@ -65,24 +65,23 @@ const Login = () => {
 
   return (
     <Row>
-      <Col sm="4">
-        {showModal && (
-          <ModalAlert
-            header={header}
-            content={content}
-            onClose={hideModalHandler}
-          />
-        )}
+      {showModal && (
+        <ModalAlert
+          header={header}
+          content={content}
+          onClose={hideModalHandler}
+        />
+      )}
 
+      <Col xs="4" sm="4" md="4" lg="3">
         <FormProvider {...methods}>
           <Form onSubmit={methods.handleSubmit(onSubmitHandler)}>
-            <h4>Login</h4>
             <LoginForm />
           </Form>
         </FormProvider>
       </Col>
-      <Col sm="8" style={{ height: "100%" }}>
-        <Image src={image} width="100%" height="100%" alt="Login Image" />
+      <Col xs="8" sm="6" md="8" lg="9">
+        <Image src={image} width="100%" alt="Login Image" />
       </Col>
     </Row>
   );
