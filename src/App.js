@@ -5,11 +5,10 @@ import Footer from "./components/Footer/Footer";
 
 import "./App.css";
 import AuthContext from "./components/store/auth-context";
-import Sidebar from "./components/UI/Sidebar/SideBar";
-
 const Index = React.lazy(() => import("./components/Register/Index"));
 const LogList = React.lazy(() => import("./components/Admin/LogList"));
 const Login = React.lazy(() => import("./components/Admin/Login/Login"));
+const Sidebar = React.lazy(() => import("./components/UI/Sidebar/SideBar"));
 const ForgetPassword = React.lazy(() =>
   import("./components/Admin/ForgetPassword/ForgetPassword")
 );
@@ -23,38 +22,36 @@ function App() {
   const authCtx = useContext(AuthContext);
   return (
     <Suspense fallback={<Spinner />}>
-      <div style={{ display: "flex" }}>
-
       <Header title="LogBook" />
+      <div className="grid">
+        {authCtx.isLoggedIn && <Sidebar />}
 
-      <Sidebar />
+        <main>
+          <Switch>
+            <Route path="/" exact>
+              <Index />
+            </Route>
 
-      <main>
-        <Switch>
-          <Route path="/" exact>
-            <Index />
-          </Route>
+            <Route path="/viewlogs">
+              {authCtx.isLoggedIn && <LogList />}
+              {!authCtx.isLoggedIn && <Login />}
+            </Route>
 
-          <Route path="/viewlogs">
-            {authCtx.isLoggedIn && <LogList />}
-            {!authCtx.isLoggedIn && <Login />}
-          </Route>
+            <Route path="/admin/login">
+              {!authCtx.isLoggedIn && <Login />}
+              {authCtx.isLoggedIn && <Redirect to="/viewlogs" />}
+            </Route>
 
-          <Route path="/admin/login">
-            {!authCtx.isLoggedIn && <Login />}
-            {authCtx.isLoggedIn && <Redirect to="/viewlogs" />}
-          </Route>
-
-          <Route path="/admin/forgetpassword">
-            <ForgetPassword />
-          </Route>
-          <Route path="*">
-            <PageNotFound />
-          </Route>
-        </Switch>
-      </main>
-      <Footer />
+            <Route path="/admin/forgetpassword">
+              <ForgetPassword />
+            </Route>
+            <Route path="*">
+              <PageNotFound />
+            </Route>
+          </Switch>
+        </main>
       </div>
+      <Footer />
     </Suspense>
   );
 }

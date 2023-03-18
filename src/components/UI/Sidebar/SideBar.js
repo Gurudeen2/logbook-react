@@ -12,16 +12,21 @@ import { NavLink } from "react-router-dom";
 const Sidebar = () => {
   return (
     <div
-      style={{ display: "flex", height:"inherit", overflow: "scroll initial" }}
+      style={{
+        display: "flex",
+        height: "inherit",
+        overflow: "scroll initial",
+        paddingTop: "5rem",
+      }}
     >
-      <CDBSidebar textColor="#fff" backgroundColor="#333">
+      <CDBSidebar textColor="#fff" backgroundColor="#8a2b06">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a
             href="/"
             className="text-decoration-none"
             style={{ color: "inherit" }}
           >
-            Sidebar
+            LogBook
           </a>
         </CDBSidebarHeader>
 
@@ -53,17 +58,11 @@ const Sidebar = () => {
               </CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
-        </CDBSidebarContent>
 
-        <CDBSidebarFooter style={{ textAlign: "center" }}>
-          <div
-            style={{
-              padding: "20px 5px",
-            }}
-          >
-            Sidebar Footer
-          </div>
-        </CDBSidebarFooter>
+          <CDBSidebarFooter style={{ textAlign: "center" }}>
+            <CDBSidebarMenuItem icon="chart-line">LOGOUT</CDBSidebarMenuItem>
+          </CDBSidebarFooter>
+        </CDBSidebarContent>
       </CDBSidebar>
     </div>
   );

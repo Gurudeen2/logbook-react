@@ -39,7 +39,12 @@ main {
     transform: rotate(360deg);
   }
 }
-
-.main {
-  margin-top: 5rem;
+.grid {
+  display: grid;
+  grid-template-areas:
+    "head head head"
+    "side content content"
+    "foot foot foot";
 }
+
+
