@@ -24,14 +24,17 @@ function App() {
   return (
     <Suspense fallback={<Spinner />}>
       <Header title="LogBook" />
-      <NewUser />
-      {/* <div className="grid">
+
+      <div className="grid">
         {authCtx.isLoggedIn && <Sidebar />}
 
         <main>
           <Switch>
             <Route path="/" exact>
               <Index />
+            </Route>
+            <Route path="/registercm" exact>
+              <NewUser />
             </Route>
 
             <Route path="/viewlogs" exact>
@@ -52,7 +55,7 @@ function App() {
             </Route>
           </Switch>
         </main>
-      </div> */}
+      </div>
       <Footer />
     </Suspense>
   );
