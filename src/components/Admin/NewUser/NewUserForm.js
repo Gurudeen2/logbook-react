@@ -187,7 +187,7 @@ const NewUserForm = () => {
                   <Form.Control
                     type="text"
                     {...register("nextofkinno")}
-                    name="state"
+                    name="nextofkinno"
                     style={{ height: "1.8rem" }}
                     required
                   />
