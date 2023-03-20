@@ -60,7 +60,7 @@ const NewUser = () => {
       {onShow && (
         <ModalAlert onClose={onHideHandler} header={header} content={info} />
       )}
-      <Form onSubmit={methods.handleSubmit(onSubmit)}>
+      <Form onSubmit={methods.handleSubmit(onSubmit)} ref={reset}>
         <NewUserForm />
       </Form>
     </FormProvider>
