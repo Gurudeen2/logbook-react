@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Row, Col, Container, Card, Button } from "react-bootstrap";
 import { useFormContext } from "react-hook-form";
 
-const NewUserForm = (props) => {
+const NewUserForm = () => {
   const { register } = useFormContext();
 
   return (
@@ -42,14 +42,14 @@ const NewUserForm = (props) => {
               </Form.Group>
             </Col>
             <Col>
-              <Form.Group as={Row} controlId="telNo">
+              <Form.Group as={Row} controlId="telno">
                 <Form.Label column sm="6" className="text-left">
                   Mobile Number*
                 </Form.Label>
                 <Col sm="8">
                   <Form.Control
                     type="text"
-                    name="telNo"
+                    name="telno"
                     style={{ height: "1.8rem" }}
                     {...register("telno")}
                     required
@@ -83,7 +83,6 @@ const NewUserForm = (props) => {
               </Form.Group>
             </Col>
             <Col>
-              {" "}
               <Form.Group as={Row} controlId="refer">
                 <Form.Label column sm="6" className="text-left">
                   Referred By*
@@ -97,6 +96,48 @@ const NewUserForm = (props) => {
                   />
                   <Form.Control.Feedback type="invalid">
                     Please Enter Referred Person!
+                  </Form.Control.Feedback>
+                </Col>
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col>
+              <Form.Group as={Row} controlId="ppa">
+                <Form.Label column sm="6" className="text-left">
+                  PPA
+                </Form.Label>
+                <Col sm="8">
+                  <Form.Control
+                    type="text"
+                    name="ppa"
+                    {...register("ppa")}
+                    style={{ height: "1.8rem" }}
+                  />
+                </Col>
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group as={Row} controlId="type">
+                <Form.Label column sm="6" className="text-left">
+                  Type*
+                </Form.Label>
+                <Col sm="8">
+                  <Form.Select
+                    size="sm"
+                    name="type"
+                    {...register("type")}
+                    required
+                  >
+                    <option></option>
+                    <option>Visitor</option>
+                    <option>Lodgite</option>
+                    <option>Campite</option>
+                  </Form.Select>
+
+                  <Form.Control.Feedback type="invalid">
+                    Please Enter Type!
                   </Form.Control.Feedback>
                 </Col>
               </Form.Group>

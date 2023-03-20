@@ -9,7 +9,6 @@ const SignForm = () => {
     <Container style={{ marginBottom: "5rem", paddingLeft:"5rem" }}>
       <h5 style={{ paddingTop: "1rem" }}>Sign In/Out</h5>
       <br />
-
       <Card>
         <Card.Header
           style={{

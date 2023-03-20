@@ -42,7 +42,6 @@ const Index = () => {
     }
     onShowHandler();
     reset.current.reset();
-    console.log("Register/Index", data);
   };
 
   return (
