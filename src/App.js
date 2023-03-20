@@ -5,6 +5,7 @@ import Footer from "./components/Footer/Footer";
 
 import "./App.css";
 import AuthContext from "./components/store/auth-context";
+import NewUser from "./components/Admin/NewUser/NewUser";
 const Index = React.lazy(() => import("./components/Register/Index"));
 const LogList = React.lazy(() => import("./components/Admin/LogList"));
 const Login = React.lazy(() => import("./components/Admin/Login/Login"));
@@ -23,7 +24,8 @@ function App() {
   return (
     <Suspense fallback={<Spinner />}>
       <Header title="LogBook" />
-      <div className="grid">
+      <NewUser />
+      {/* <div className="grid">
         {authCtx.isLoggedIn && <Sidebar />}
 
         <main>
@@ -50,7 +52,7 @@ function App() {
             </Route>
           </Switch>
         </main>
-      </div>
+      </div> */}
       <Footer />
     </Suspense>
   );
