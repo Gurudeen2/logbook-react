@@ -6,7 +6,7 @@ const NewUserForm = () => {
   const { register } = useFormContext();
 
   return (
-    <Container style={{ marginBottom: "5rem" }}>
+    <Container style={{ marginBottom: "5rem", paddingLeft: "3rem" }}>
       <h5>Add New User</h5>
       <br />
 
