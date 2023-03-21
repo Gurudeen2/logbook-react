@@ -1,11 +1,12 @@
 import React, { Suspense, useContext } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 
 import "./App.css";
 import AuthContext from "./components/store/auth-context";
 import NewUser from "./components/Admin/NewUser/NewUser";
+import ViewMember from "./components/Admin/NewUser/ViewNewMember";
 const Index = React.lazy(() => import("./components/Register/Index"));
 const LogList = React.lazy(() => import("./components/Admin/LogList"));
 const Login = React.lazy(() => import("./components/Admin/Login/Login"));
@@ -18,9 +19,18 @@ const PageNotFound = React.lazy(() =>
 );
 
 const Spinner = React.lazy(() => import("./components/UI/Spinner"));
+const { pathname } = useLocation();
 
+const addsigin = pathname("/");
+const login = pathname("/admin/login");
+const registercm = pathname("/registercm");
+const forgetpass = pathname("/admin/forgetpassword");
+
+const sidebarCondition = !addsigin && !login && !registercm && !forgetpass
+console.log("sidecondtion", sidebarCondition)
 function App() {
   const authCtx = useContext(AuthContext);
+  // /, registercm, /admin/login, /admin/forgetpassword
   return (
     <Suspense fallback={<Spinner />}>
       <Header title="LogBook" />
@@ -35,6 +45,10 @@ function App() {
             </Route>
             <Route path="/registercm" exact>
               <NewUser />
+            </Route>
+
+            <Route path="/viewmember">
+              <ViewMember />
             </Route>
 
             <Route path="/viewlogs" exact>
