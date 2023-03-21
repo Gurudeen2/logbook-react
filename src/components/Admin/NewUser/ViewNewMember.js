@@ -10,7 +10,7 @@ import { db } from "../../firebaseConfig/config";
 import "./ViewMember.css";
 
 const ViewMember = () => {
-  const [viewMember, setViewMember] = useState([]);
+  const [viewMembers, setViewMembers] = useState([]);
   const [header, setHeader] = useState();
   const [content, setContent] = useState();
   const [showModal, setShowModal] = useState(false);
@@ -132,7 +132,7 @@ const ViewMember = () => {
             // mobilenumber: newData[key].logbook.mobilenumber,
           );
         }
-        setViewMember(transData);
+        setViewMembers(transData);
       })
       .catch((err) => {
         setContent(err.message);
@@ -147,13 +147,13 @@ const ViewMember = () => {
 
   const searchHandler = (e) => {
     if (e.target.value.trim() !== "") {
-      const filteredData = logList.filter(
-        (list) =>
-          list.fullname === e.target.value.trim() ||
-          list.mobilenumber === e.target.value.trim()
+      const filteredData = viewMembers.filter(
+        (member) =>
+          member.fullname === e.target.value.trim() ||
+          member.mobilenumber === e.target.value.trim()
       );
 
-      setViewMember(filteredData);
+      setViewMembers(filteredData);
     }
   };
 
@@ -185,7 +185,7 @@ const ViewMember = () => {
               onChange={searchHandler}
               style={{ height: "1.8rem" }}
               placeholder="Search By Name or Mobile Number"
-              // required
+              
             />
             <div style={{ paddingLeft: "0.4rem" }}>
               <Button size="sm" variant="success">
@@ -201,7 +201,7 @@ const ViewMember = () => {
         striped
         bootstrap4={true}
         keyField="id"
-        data={logList}
+        data={viewMembers}
         columns={columns}
         defaultSorted={defaultSorted}
         pagination={paginationFactory({

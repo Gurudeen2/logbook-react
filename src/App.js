@@ -19,24 +19,24 @@ const PageNotFound = React.lazy(() =>
 );
 
 const Spinner = React.lazy(() => import("./components/UI/Spinner"));
-const { pathname } = useLocation();
 
-const addsigin = pathname("/");
-const login = pathname("/admin/login");
-const registercm = pathname("/registercm");
-const forgetpass = pathname("/admin/forgetpassword");
-
-const sidebarCondition = !addsigin && !login && !registercm && !forgetpass
-console.log("sidecondtion", sidebarCondition)
 function App() {
   const authCtx = useContext(AuthContext);
-  // /, registercm, /admin/login, /admin/forgetpassword
+  const { pathname } = useLocation();
+
+  const addsigin = pathname.match("/");
+  const login = pathname.match("/admin/login");
+  const registercm = pathname.match("/registercm");
+  const forgetpass = pathname.match("/admin/forgetpassword");
+
+  const sidebarCondition = !addsigin && !login && !registercm && !forgetpass;
+  
   return (
     <Suspense fallback={<Spinner />}>
       <Header title="LogBook" />
 
       <div className="grid">
-        {authCtx.isLoggedIn && <Sidebar />}
+        {authCtx.isLoggedIn && sidebarCondition && <Sidebar />}
 
         <main>
           <Switch>

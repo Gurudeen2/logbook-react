@@ -169,9 +169,9 @@ const LogList = () => {
       <Container fluid style={{ paddingBottom: "0.3rem" }}>
         <Row style={{ textAlign: "left" }}>
           <Col sm="12" md="8" lg="9">
-            <Button size="sm" variant="danger">
+            {/* <Button size="sm" variant="danger">
               Add User
-            </Button>
+            </Button> */}
           </Col>
           <Col
             sm="12"
@@ -185,7 +185,6 @@ const LogList = () => {
               onChange={searchHandler}
               style={{ height: "1.8rem" }}
               placeholder="Search By Name or Mobile Number"
-              // required
             />
             <div style={{ paddingLeft: "0.4rem" }}>
               <Button size="sm" variant="success">

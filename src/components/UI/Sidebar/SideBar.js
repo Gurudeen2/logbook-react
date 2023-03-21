@@ -34,8 +34,21 @@ const Sidebar = () => {
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
             <NavLink exact to="/viewlogs" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">View Logs</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/viewmember" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">
-                View Registers
+                View Registered CM
+              </CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/registercm" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">
+                Register CM
+              </CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">
+                Sign In/Out
               </CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
