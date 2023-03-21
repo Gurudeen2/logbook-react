@@ -28,6 +28,7 @@ const NewUser = () => {
       const docRef = await addDoc(collection(db, "newmembers"), {
         logbook: {
           Fullname: data.fullname,
+          Gender: data.gender,
           NextofKin: data.nextofkin,
           NextofKinNo: data.nextofkinno,
           PPA: data.ppa,
@@ -35,7 +36,7 @@ const NewUser = () => {
           State: data.state,
           Type: data.type,
           Telephone: data.telno,
-          date: date.toLocaleString(),
+          Date: date.toLocaleString(),
         },
       });
 

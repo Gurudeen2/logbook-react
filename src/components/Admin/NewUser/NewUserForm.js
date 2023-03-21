@@ -143,6 +143,33 @@ const NewUserForm = () => {
               </Form.Group>
             </Col>
           </Row>
+
+          <Row>
+            <Col>
+              <Form.Group as={Row} controlId="gender">
+                <Form.Label column sm="6" className="text-left">
+                  Gender*
+                </Form.Label>
+                <Col sm="8">
+                  <Form.Select
+                    size="sm"
+                    name="type"
+                    {...register("gender")}
+                    required
+                  >
+                    <option></option>
+                    <option>Female</option>
+                    <option>Male</option>
+                  </Form.Select>
+
+                  <Form.Control.Feedback type="invalid">
+                    Please Enter Gender!
+                  </Form.Control.Feedback>
+                </Col>
+              </Form.Group>
+            </Col>
+            <Col></Col>
+          </Row>
         </Card.Body>
       </Card>
 
