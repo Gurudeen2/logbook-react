@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
-import Card from "../UI/Card";
-import ModalAlert from "../UI/ModalPopup";
+import Card from "../../UI/Card";
+import ModalAlert from "../../UI/ModalPopup";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
 import { getDocs, collection } from "firebase/firestore";
-import { db } from "../firebaseConfig/config";
+import { db } from "../../firebaseConfig/config";
 
 import "./ViewMember.css";
 
@@ -89,7 +89,7 @@ const ViewMember = () => {
       },
     },
     {
-      dataField: "date",
+      dataField: "Date",
       text: "Date",
       sort: true,
       headerStyle: {
@@ -111,7 +111,7 @@ const ViewMember = () => {
   };
 
   const fetchPost = useCallback(async () => {
-    await getDocs(collection(db, "logbook"))
+    await getDocs(collection(db, "newmembers"))
       .then((logdoc) => {
         const newData = logdoc.docs.map((doc) => ({
           ...doc.data(),
@@ -119,19 +119,20 @@ const ViewMember = () => {
         }));
         let transData = [];
         for (let key in newData) {
-          transData.push({
-            id: newData[key].id,
-            fullname: newData[key].logbook.fullname,
-            gender: newData[key].logbook.gender,
-            nextofkin: newData[key].logbook.nextofkin,
-            nextofkinno: newData[key].logbook.nextofkinno,
-            status: newData[key].logbook.status,
-            signdate: newData[key].logbook.signdate,
-            state: newData[key].logbook.state,
-            mobilenumber: newData[key].logbook.mobilenumber,
-          });
+          transData.push(
+            newData[key]
+            // id: newData[key].id,
+            // fullname: newData[key].logbook.Fullname,
+            // gender: newData[key].logbook.Gender,
+            // nextofkin: newData[key].logbook.nextofkin,
+            // nextofkinno: newData[key].logbook.nextofkinno,
+            // status: newData[key].logbook.status,
+            // signdate: newData[key].logbook.signdate,
+            // state: newData[key].logbook.state,
+            // mobilenumber: newData[key].logbook.mobilenumber,
+          );
         }
-        setLogList(transData);
+        setViewMember(transData);
       })
       .catch((err) => {
         setContent(err.message);
@@ -152,7 +153,7 @@ const ViewMember = () => {
           list.mobilenumber === e.target.value.trim()
       );
 
-      setLogList(filteredData);
+      setViewMember(filteredData);
     }
   };
 
