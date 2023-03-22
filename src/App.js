@@ -1,4 +1,4 @@
-import React, { Suspense, useContext, useState } from "react";
+import React, { Suspense, useContext } from "react";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -29,11 +29,10 @@ function App() {
   const registercm = pathname.match("/registercm");
   const forgetpass = pathname.match("/admin/forgetpassword");
 
-  const [sidebarCondition, setSidebarCondition] = useState(false);
+  let sidebarCondition = false;
 
-  if (!addsigin || !login || !registercm || !forgetpass) {
-    setSidebarCondition(true);
-  }
+  if (!addsigin || !login || !registercm || !forgetpass) sidebarCondition = true;
+
   return (
     <Suspense fallback={<Spinner />}>
       <Header title="LogBook" />
