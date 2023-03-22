@@ -46,16 +46,18 @@ const ForgetPasswordForm = (props) => {
                   required
                   {...register("email")}
                 />
-                <InputGroup.Text
-                  style={{
-                    fontSize: "10px",
-                    cursor: "pointer",
-                    fontWeight: "bold",
-                  }}
-                  onClick={props.onSendCode}
-                >
-                  Get Code
-                </InputGroup.Text>
+                {props.Display && (
+                  <InputGroup.Text
+                    style={{
+                      fontSize: "10px",
+                      cursor: "pointer",
+                      fontWeight: "bold",
+                    }}
+                    onClick={props.onSendCode}
+                  >
+                    Get Code
+                  </InputGroup.Text>
+                )}
               </InputGroup>
               <Form.Control.Feedback type="invalid">
                 Please enter email!
@@ -67,7 +69,7 @@ const ForgetPasswordForm = (props) => {
       </Row>
       {props.Display && (
         <Row>
-          <Col>
+          <Col sm="8">
             <Form.Group as={Row} controlId="code">
               <Form.Label column sm="6" className="text-left">
                 Verification Code
@@ -76,7 +78,6 @@ const ForgetPasswordForm = (props) => {
                 <Form.Control
                   type="code"
                   name="code"
-                
                   placeholder="Enter Verification code"
                   style={{ height: "1.8rem" }}
                   required
