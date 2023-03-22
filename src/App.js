@@ -29,8 +29,11 @@ function App() {
   const registercm = pathname.match("/registercm");
   const forgetpass = pathname.match("/admin/forgetpassword");
 
-  const sidebarCondition = !addsigin && !login && !registercm && !forgetpass;
+  const [sidebarCondition, setSidebarCondition] = useState(false);
 
+  if (!addsigin || !login || !registercm || !forgetpass) {
+    setSidebarCondition(true);
+  }
   return (
     <Suspense fallback={<Spinner />}>
       <Header title="LogBook" />
@@ -62,7 +65,7 @@ function App() {
             </Route>
 
             <Route path="/admin/forgetpassword">
-              <ForgetPassword />
+              {!authCtx.isLoggedIn && <ForgetPassword />}
             </Route>
             <Route path="*">
               <PageNotFound />

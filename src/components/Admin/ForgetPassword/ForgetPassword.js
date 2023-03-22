@@ -4,6 +4,11 @@ import { Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import ForgetPasswordForm from "./ForgetPasswordForm";
 import ModalAlert from "../../UI/ModalPopup";
+import {
+  continueURI,
+  sendCodeUrlForgetPassword,
+  verifyEmailForgetPasswordUrl,
+} from "../../firebaseConfig/url";
 
 const ForgetPassword = () => {
   const methods = useForm();
@@ -17,20 +22,17 @@ const ForgetPassword = () => {
   };
 
   const onSendCodeHandler = (data) => {
-    fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDhWhFfRLQcjt9b32VWS-UdafLsURRjBQ8",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          requestType: "PASSWORD_RESET",
-          email: data.email,
-        }),
+    fetch(sendCodeUrlForgetPassword, {
+      method: "POST",
+      body: JSON.stringify({
+        requestType: "PASSWORD_RESET",
+        email: data.email,
+      }),
 
-        header: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+      header: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => {
         if (res.ok) {
           setContent("check your mail, A Link as been sent to your mail");
@@ -50,19 +52,16 @@ const ForgetPassword = () => {
   const verifyMail = async (data) => {
     const configdata = {
       identifier: data.email,
-      continueUri: "http://localhost:3000/admin/forgetpassword",
+      continueUri: continueURI,
     };
 
-    await fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:createAuthUri?key=AIzaSyDhWhFfRLQcjt9b32VWS-UdafLsURRjBQ8",
-      {
-        method: "POST",
-        body: JSON.stringify(configdata),
-        header: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    await fetch(verifyEmailForgetPasswordUrl, {
+      method: "POST",
+      body: JSON.stringify(configdata),
+      header: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => {
         if (res.ok) return res.json();
       })

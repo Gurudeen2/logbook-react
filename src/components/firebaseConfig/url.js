@@ -6,3 +6,5 @@ export const verifyEmailForgetPasswordUrl =
 
 export const loginUrl =
   "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDhWhFfRLQcjt9b32VWS-UdafLsURRjBQ8";
+
+export const continueURI = "http://localhost:3000/admin/forgetpassword";
