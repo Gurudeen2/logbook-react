@@ -12,6 +12,7 @@ const ForgetPassword = () => {
   const [show, setShow] = useState(false);
   const [header, setHeader] = useState();
   const [content, setContent] = useState();
+  const [confirmReg, setConfirmReg] = useState(false);
 
   const hideModalHandler = () => {
     setShow(false);
@@ -49,10 +50,20 @@ const ForgetPassword = () => {
     )
       .then((res) => {
         if (res.ok) return res.json();
-        // console.log("res", res);
       })
-      .then((res) => console.log("check", res.allProviders))
-      .catch((err) => console.log("error", err));
+      .then((res) => {
+        if (!res.registered) {
+          setContent("No account with this email");
+          setHeader("Error");
+          setShow(true);
+          return;
+        }
+        setConfirmReg(res.registered);
+      })
+      .catch((err) => {
+        setContent(`${err}`);
+        setHeader("Error");
+      });
   };
 
   const verifyMail = (data) => {
@@ -102,15 +113,15 @@ const ForgetPassword = () => {
     //         }
     //       })
     //       .catch((err) => {
-    //         setContent(`${err}`);
-    //         setHeader("Error");
+    // setContent(`${err}`);
+    // setHeader("Error");
     //       });
     //   } else {
-    //     setContent("Email entered is incorrect, Please enter the correct one");
-    //     setHeader("Error");
+    // setContent("Email entered is incorrect, Please enter the correct one");
+    // setHeader("Error");
     //   }
     // });
-    setShow(true);
+    // setShow(true);
   };
   return (
     <FormProvider {...methods}>
@@ -122,7 +133,7 @@ const ForgetPassword = () => {
             onClose={hideModalHandler}
           />
         )}
-        <ForgetPasswordForm />
+        <ForgetPasswordForm Display={confirmReg} />
       </Form>
     </FormProvider>
   );

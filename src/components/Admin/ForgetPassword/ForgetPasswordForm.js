@@ -65,7 +65,7 @@ const ForgetPasswordForm = (props) => {
         </Col>
         <Col></Col>
       </Row>
-      {display && (
+      {props.Display && (
         <Row>
           <Col>
             <Form.Group as={Row} controlId="code">
@@ -76,6 +76,7 @@ const ForgetPasswordForm = (props) => {
                 <Form.Control
                   type="code"
                   name="code"
+                
                   placeholder="Enter Verification code"
                   style={{ height: "1.8rem" }}
                   required
@@ -124,7 +125,7 @@ const ForgetPasswordForm = (props) => {
       )}
       <Row style={{ paddingTop: "0.4rem" }}>
         <Col>
-          <Button variant="success" type="submit">
+          <Button variant="success" size="sm" type="submit">
             Change Password
           </Button>
         </Col>
