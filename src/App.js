@@ -30,7 +30,7 @@ function App() {
   const forgetpass = pathname.match("/admin/forgetpassword");
 
   const sidebarCondition = !addsigin && !login && !registercm && !forgetpass;
-  
+
   return (
     <Suspense fallback={<Spinner />}>
       <Header title="LogBook" />
@@ -48,7 +48,7 @@ function App() {
             </Route>
 
             <Route path="/viewmember">
-              <ViewMember />
+              {authCtx.isLoggedIn && <ViewMember />}
             </Route>
 
             <Route path="/viewlogs" exact>
