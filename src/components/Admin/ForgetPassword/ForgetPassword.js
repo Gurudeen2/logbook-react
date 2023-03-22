@@ -48,9 +48,10 @@ const ForgetPassword = () => {
       }
     )
       .then((res) => {
-        if (res.ok) return console.log("res", res.json());
+        if (res.ok) return res.json();
         // console.log("res", res);
       })
+      .then((res) => console.log("check", res.allProviders))
       .catch((err) => console.log("error", err));
   };
 

@@ -25,12 +25,8 @@ const ForgetPasswordForm = (props) => {
     setInputName(e.target.type);
   };
 
-  cons= () => {
-
-    
-    // if (is)// code is send enable the code input
-    //after correct display password and confirm password and disable email and code input
-  };
+  // if (is)// code is send enable the code input
+  //after correct display password and confirm password and disable email and code input
 
   return (
     <Container>
@@ -128,7 +124,7 @@ const ForgetPasswordForm = (props) => {
       )}
       <Row style={{ paddingTop: "0.4rem" }}>
         <Col>
-          <Button variant="success" type="submit" onClick>
+          <Button variant="success" type="submit">
             Change Password
           </Button>
         </Col>
