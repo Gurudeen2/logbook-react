@@ -16,7 +16,7 @@ const Sidebar = () => {
     <div
       style={{
         display: "flex",
-        height: "inherit",
+        height: "130%",
         overflow: "scroll initial",
       }}
     >
