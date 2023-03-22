@@ -6,6 +6,7 @@ import AuthContext from "../../store/auth-context";
 import ModalAlert from "../../UI/ModalPopup";
 import { FormProvider, useForm } from "react-hook-form";
 import image from "../../../assets/images/log.jpg";
+import { loginUrl } from "../../firebaseConfig/url";
 
 const Login = () => {
   const navigate = useHistory();
@@ -25,20 +26,17 @@ const Login = () => {
   };
 
   const onSubmitHandler = (data) => {
-    fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDhWhFfRLQcjt9b32VWS-UdafLsURRjBQ8",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          email: data.username,
-          password: data.password,
-          returnSecureToken: true,
-        }),
-        header: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    fetch(loginUrl, {
+      method: "POST",
+      body: JSON.stringify({
+        email: data.username,
+        password: data.password,
+        returnSecureToken: true,
+      }),
+      header: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -81,9 +79,7 @@ const Login = () => {
         </FormProvider>
       </Col>
       <Col xs="7" sm="8" md="8" lg="9">
-        <Image src={image}  fluid alt="Login Image" style={{
-  
-        }}/>
+        <Image src={image} fluid alt="Login Image" style={{}} />
       </Col>
     </Row>
   );
