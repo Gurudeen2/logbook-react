@@ -26,7 +26,7 @@ const NewUser = () => {
   const onSubmit = async (data) => {
     try {
       const docRef = await addDoc(collection(db, "newmembers"), {
-        logbook: {
+        newmember: {
           Fullname: data.fullname,
           Gender: data.gender,
           NextofKin: data.nextofkin,

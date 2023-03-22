@@ -119,18 +119,19 @@ const ViewMember = () => {
         }));
         let transData = [];
         for (let key in newData) {
-          transData.push(
-            newData[key]
-            // id: newData[key].id,
-            // fullname: newData[key].logbook.Fullname,
-            // gender: newData[key].logbook.Gender,
-            // nextofkin: newData[key].logbook.nextofkin,
-            // nextofkinno: newData[key].logbook.nextofkinno,
-            // status: newData[key].logbook.status,
-            // signdate: newData[key].logbook.signdate,
-            // state: newData[key].logbook.state,
-            // mobilenumber: newData[key].logbook.mobilenumber,
-          );
+          transData.push({
+            id: newData[key].id,
+            Date: newData[key].newmembers.Date,
+            Fullname: newData[key].newmembers.Fullname,
+            Gender: newData[key].newmembers.Gender,
+            NextofKin: newData[key].newmembers.NextofKin,
+            NextofKinNo: newData[key].newmembers.NextofKinNo,
+            PPA: newData[key].newmembers.PPA,
+            Refer: newData[key].newmembers.Refer,
+            State: newData[key].newmembers.State,
+            Telephone: newData[key].newmembers.Telephone,
+            Type: newData[key].newmembers.Type,
+          });
         }
         setViewMembers(transData);
       })
@@ -185,7 +186,6 @@ const ViewMember = () => {
               onChange={searchHandler}
               style={{ height: "1.8rem" }}
               placeholder="Search By Name or Mobile Number"
-              
             />
             <div style={{ paddingLeft: "0.4rem" }}>
               <Button size="sm" variant="success">
