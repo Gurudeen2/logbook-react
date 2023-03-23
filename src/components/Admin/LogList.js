@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import Card from "../UI/Card";
 import ModalAlert from "../UI/ModalPopup";
@@ -11,12 +11,10 @@ import "./LogList.css";
 
 const LogList = () => {
   const [logList, setLogList] = useState([]);
-  const [logListFiltered, setLogListFiltered] = useState([]);
   const [header, setHeader] = useState();
   const [content, setContent] = useState();
   const [showModal, setShowModal] = useState(false);
-  const [value, setValue] = useState("");
-
+  const searchValue = useRef();
   const showModalHandler = () => {
     setShowModal(true);
   };
@@ -113,13 +111,13 @@ const LogList = () => {
   };
 
   const fetchPost = useCallback(async () => {
+    let transData = [];
     await getDocs(collection(db, "logbook"))
       .then((logdoc) => {
         const newData = logdoc.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
         }));
-        let transData = [];
         for (let key in newData) {
           transData.push({
             id: newData[key].id,
@@ -142,28 +140,56 @@ const LogList = () => {
       });
   }, []);
 
-  const getSearchValue = (e) => {
-    if (e.target.value.trim() !== "") setValue(e.target.value.trim());
-  };
-  const searchHandler = (e) => {
-    if (e.target.value.trim() !== "") {
-      const filteredData = logList.filter(
-        (list) =>
-          list.fullname === e.target.value.trim() ||
-          list.mobilenumber === e.target.value.trim()
-      );
+  const searchHandler = useCallback(async () => {
+    let transData = [];
+    await getDocs(collection(db, "logbook"))
+      .then((logdoc) => {
+        const newData = logdoc.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        for (let key in newData) {
+          transData.push({
+            id: newData[key].id,
+            fullname: newData[key].logbook.fullname,
+            gender: newData[key].logbook.gender,
+            nextofkin: newData[key].logbook.nextofkin,
+            nextofkinno: newData[key].logbook.nextofkinno,
+            status: newData[key].logbook.status,
+            signdate: newData[key].logbook.signdate,
+            state: newData[key].logbook.state,
+            mobilenumber: newData[key].logbook.mobilenumber,
+          });
+        }
 
-      setLogListFiltered(filteredData);
-    } else {
-      setLogListFiltered(logList);
+        if (searchValue.current.value.trim() !== "") {
+          const filteredData = transData.filter(
+            (list) =>
+              list.fullname.trim() === searchValue.current.value.trim() ||
+              list.mobilenumber.trim() === searchValue.current.value.trim()
+          );
+
+          setLogList(filteredData);
+        } else {
+          setLogList(transData);
+        }
+      })
+      .catch((err) => {
+        setContent(err.message);
+        setHeader("Failed");
+        showModalHandler();
+      });
+  }, []);
+
+  const onChangeHandler = () => {
+    if (searchValue.current.value !== "") {
+      searchHandler();
     }
-    setLogList(logListFiltered);
   };
-
   useEffect(() => {
-    fetchPost();
     searchHandler();
-  }, [fetchPost, searchHandler]);
+    fetchPost();
+  }, [fetchPost]);
 
   return (
     <Card>
@@ -190,7 +216,8 @@ const LogList = () => {
             <Form.Control
               type="text"
               name="search"
-              onChange={getSearchValue}
+              ref={searchValue}
+              onChange={onChangeHandler}
               style={{ height: "1.8rem" }}
               placeholder="Search By Name or Mobile Number"
             />

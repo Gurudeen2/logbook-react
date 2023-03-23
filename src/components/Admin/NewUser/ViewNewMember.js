@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import Card from "../../UI/Card";
 import ModalAlert from "../../UI/ModalPopup";
@@ -11,11 +11,10 @@ import "./ViewMember.css";
 
 const ViewMember = () => {
   const [viewMembers, setViewMembers] = useState([]);
-  const [viewMembersFiltered, setViewMembersFiltered] = useState([]);
   const [header, setHeader] = useState();
   const [content, setContent] = useState();
   const [showModal, setShowModal] = useState(false);
-
+  const searchValue = useRef();
   const showModalHandler = () => {
     setShowModal(true);
   };
@@ -143,24 +142,56 @@ const ViewMember = () => {
       });
   }, []);
 
+  const searchHandler = useCallback(async () => {
+    let transData = [];
+    await getDocs(collection(db, "logbook"))
+      .then((logdoc) => {
+        const newData = logdoc.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        for (let key in newData) {
+          transData.push({
+            id: newData[key].id,
+            fullname: newData[key].logbook.fullname,
+            gender: newData[key].logbook.gender,
+            nextofkin: newData[key].logbook.nextofkin,
+            nextofkinno: newData[key].logbook.nextofkinno,
+            status: newData[key].logbook.status,
+            signdate: newData[key].logbook.signdate,
+            state: newData[key].logbook.state,
+            mobilenumber: newData[key].logbook.mobilenumber,
+          });
+        }
+
+        if (searchValue.current.value.trim() !== "") {
+          const filteredData = transData.filter(
+            (member) =>
+              member.Fullname === searchValue.current.value.trim() ||
+              member.Telephone === searchValue.current.value.trim() ||
+              member.Type === searchValue.current.value.trim()
+          );
+
+          setViewMembers(filteredData);
+        } else {
+          setViewMembers(transData);
+        }
+      })
+      .catch((err) => {
+        setContent(err.message);
+        setHeader("Failed");
+        showModalHandler();
+      });
+  }, []);
+
+  const onChangeHandler = () => {
+    searchHandler();
+  };
+
   useEffect(() => {
+    searchHandler();
     fetchPost();
   }, [fetchPost]);
-
-  const searchHandler = (e) => {
-    if (e.target.value.trim() !== "") {
-      const filteredData = viewMembers.filter(
-        (member) =>
-          member.Fullname === e.target.value.trim() ||
-          member.Telephone === e.target.value.trim() ||
-          member.Type === e.target.value.trim()
-      );
-      setViewMembersFiltered(filteredData);
-    } else {
-      setViewMembersFiltered(viewMembers);
-    }
-    setViewMembers(viewMembersFiltered)
-  };
 
   return (
     <Card>
@@ -187,12 +218,13 @@ const ViewMember = () => {
             <Form.Control
               type="text"
               name="search"
-              onChange={searchHandler}
+              onChange={onChangeHandler}
+              ref={searchValue}
               style={{ height: "1.8rem" }}
               placeholder="Search By Name or Mobile Number"
             />
             <div style={{ paddingLeft: "0.4rem" }}>
-              <Button size="sm" variant="success">
+              <Button size="sm" variant="success" onCLick={searchHandler}>
                 Search
               </Button>
             </div>
