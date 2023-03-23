@@ -11,9 +11,11 @@ import "./LogList.css";
 
 const LogList = () => {
   const [logList, setLogList] = useState([]);
+  const [logListFiltered, setLogListFiltered] = useState([]);
   const [header, setHeader] = useState();
   const [content, setContent] = useState();
   const [showModal, setShowModal] = useState(false);
+  const [value, setValue] = useState("");
 
   const showModalHandler = () => {
     setShowModal(true);
@@ -140,10 +142,9 @@ const LogList = () => {
       });
   }, []);
 
-  useEffect(() => {
-    fetchPost();
-  }, [fetchPost]);
-
+  const getSearchValue = (e) => {
+    if (e.target.value.trim() !== "") setValue(e.target.value.trim());
+  };
   const searchHandler = (e) => {
     if (e.target.value.trim() !== "") {
       const filteredData = logList.filter(
@@ -152,9 +153,17 @@ const LogList = () => {
           list.mobilenumber === e.target.value.trim()
       );
 
-      setLogList(filteredData);
+      setLogListFiltered(filteredData);
+    } else {
+      setLogListFiltered(logList);
     }
+    setLogList(logListFiltered);
   };
+
+  useEffect(() => {
+    fetchPost();
+    searchHandler();
+  }, [fetchPost, searchHandler]);
 
   return (
     <Card>
@@ -181,12 +190,12 @@ const LogList = () => {
             <Form.Control
               type="text"
               name="search"
-              onChange={searchHandler}
+              onChange={getSearchValue}
               style={{ height: "1.8rem" }}
               placeholder="Search By Name or Mobile Number"
             />
             <div style={{ paddingLeft: "0.4rem" }}>
-              <Button size="sm" variant="success">
+              <Button size="sm" variant="success" onClick={searchHandler}>
                 Search
               </Button>
             </div>

@@ -11,6 +11,7 @@ import "./ViewMember.css";
 
 const ViewMember = () => {
   const [viewMembers, setViewMembers] = useState([]);
+  const [viewMembersFiltered, setViewMembersFiltered] = useState([]);
   const [header, setHeader] = useState();
   const [content, setContent] = useState();
   const [showModal, setShowModal] = useState(false);
@@ -150,12 +151,15 @@ const ViewMember = () => {
     if (e.target.value.trim() !== "") {
       const filteredData = viewMembers.filter(
         (member) =>
-          member.fullname === e.target.value.trim() ||
-          member.mobilenumber === e.target.value.trim()
+          member.Fullname === e.target.value.trim() ||
+          member.Telephone === e.target.value.trim() ||
+          member.Type === e.target.value.trim()
       );
-
-      setViewMembers(filteredData);
+      setViewMembersFiltered(filteredData);
+    } else {
+      setViewMembersFiltered(viewMembers);
     }
+    setViewMembers(viewMembersFiltered)
   };
 
   return (
