@@ -9,10 +9,12 @@ const Header = (props) => {
 
   return (
     <header className={classes.header}>
-      <h1>{props.title}</h1>
+      <Link to="/">
+        <h1>{props.title}</h1>
+      </Link>
       <ul className={classes.navbar}>
         <li>
-          <Link to="/registercm"  className={activeLink}>
+          <Link to="/registercm" className={activeLink}>
             Register CM
           </Link>
         </li>

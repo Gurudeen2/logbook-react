@@ -66,7 +66,7 @@ const NewUserForm = () => {
             <Col>
               <Form.Group as={Row} controlId="state">
                 <Form.Label column sm="6" className="text-left">
-                  State of Origin*
+                  State of Origin
                 </Form.Label>
                 <Col sm="8">
                   <Form.Control
@@ -74,7 +74,6 @@ const NewUserForm = () => {
                     name="state"
                     {...register("state")}
                     style={{ height: "1.8rem" }}
-                    required
                   />
                   <Form.Control.Feedback type="invalid">
                     Please State of Origin!
@@ -85,7 +84,7 @@ const NewUserForm = () => {
             <Col>
               <Form.Group as={Row} controlId="refer">
                 <Form.Label column sm="6" className="text-left">
-                  Referred By*
+                  Referred By
                 </Form.Label>
                 <Col sm="8">
                   <Form.Control
