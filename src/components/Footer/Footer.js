@@ -7,7 +7,7 @@ const Footer = (props) => {
       <p>
         &copy; All Rights Reserved <br />
         Developed by
-        <a href={devlink} target="_blank">
+        <a href={divlink} target="_blank" rel="noopener noreferrer">
           DevTola
         </a>
       </p>

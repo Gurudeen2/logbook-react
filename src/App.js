@@ -5,8 +5,8 @@ import Footer from "./components/Footer/Footer";
 
 import "./App.css";
 import AuthContext from "./components/store/auth-context";
-import NewUser from "./components/Admin/NewUser/NewUser";
-import ViewMember from "./components/Admin/NewUser/ViewNewMember";
+import NewUser from "./components/Register/NewUser/NewUser";
+import ViewMember from "./components/Admin/ViewMember/ViewNewMember";
 const Index = React.lazy(() => import("./components/Register/Index"));
 const LogList = React.lazy(() => import("./components/Admin/LogList"));
 const Login = React.lazy(() => import("./components/Admin/Login/Login"));
