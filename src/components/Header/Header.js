@@ -9,7 +9,12 @@ const Header = (props) => {
 
   return (
     <header className={classes.header}>
-      <Link to="/">
+      <Link
+        to="/"
+        style={{
+          textDecoration: "none",
+        }}
+      >
         <h1>{props.title}</h1>
       </Link>
       <ul className={classes.navbar}>
