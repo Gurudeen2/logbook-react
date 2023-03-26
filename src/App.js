@@ -33,7 +33,7 @@ function App() {
 
   if (!addsigin || !login || !registercm || !forgetpass) 
     sidebarCondition = true;
-  }
+  
 
   return (
     <Suspense fallback={<Spinner />}>
