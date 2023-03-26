@@ -31,8 +31,10 @@ function App() {
 
   let sidebarCondition = false;
 
-  if (!addsigin || !login || !registercm || !forgetpass) sidebarCondition = true;
- 
+  if (!addsigin || !login || !registercm || !forgetpass) {
+    sidebarCondition = true;
+  }
+
   return (
     <Suspense fallback={<Spinner />}>
       <Header title="LogBook" />
