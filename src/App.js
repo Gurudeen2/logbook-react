@@ -31,7 +31,7 @@ function App() {
 
   let sidebarCondition = false;
 
-  if (!addsigin || !login || !registercm || !forgetpass) {
+  if (!addsigin || !login || !registercm || !forgetpass) 
     sidebarCondition = true;
   }
 
