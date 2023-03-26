@@ -36,7 +36,7 @@ function App() {
 
   return (
     <Suspense fallback={<Spinner />}>
-      <Header title="LogBo" />
+      <Header title="LogBook" />
 
       <div className="grid">
         {authCtx.isLoggedIn && sidebarCondition && <Sidebar />}
