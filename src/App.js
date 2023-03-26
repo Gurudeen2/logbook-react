@@ -33,9 +33,7 @@ function App() {
 
   if (!addsigin || !login || !registercm || !forgetpass)
     sidebarCondition = true;
-  if (sidebarCondition) {
-  console.log("yes")
-}
+ 
   return (
     <Suspense fallback={<Spinner />}>
       <Header title="LogBook" />
